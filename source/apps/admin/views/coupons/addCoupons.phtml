@@ -1,0 +1,78 @@
+<div class="page-header">
+  <h1>
+       <a href="/coupons/listCoupons">优惠券管理</a>
+      <small>
+          <i class="icon-double-angle-right"></i>
+       添加优惠券
+      </small>
+  </h1>
+</div>
+<div class="row-fluid">
+    <div class="span12" >
+        <div class="widget-box">
+            <div class="widget-header widget-header-blue widget-header-flat">
+                <h4 class="lighter">
+                 添加优惠券</h4>
+            </div>
+        <div id = "yunduo-error-msg">
+
+        </div>
+        <?php  if(!empty($error)) echo "<script>yunduoErrorShow(" .json_encode(json_decode($error)->msg). ");</script>"; ?>
+            <div class="widget-body">
+                <div class="widget-main">
+          <div class="row-fluid">
+            <form id="itemForm"  class="form-horizontal form addCoupons-form"  action="/coupons/addCoupons" method="POST" enctype="multipart/form-data">
+            <div class="control-group">
+                  <label class="control-label"><small class="text-error"> * </small> 数量 </label>
+                  <div class="controls">
+                    <input type="text"  name="num"    class="required"  value="<?php echo $this->request->get('num');?>"/>
+                    <span class="help-inline"></span>
+                  </div>
+            </div>
+            <div class="control-group">
+                  <label class="control-label"><small class="text-error"> * </small> 规则类型</label>
+                  <div class="controls">
+                  <select name="crid">
+                  <?php foreach($rule as $v):?>
+                    <option class="change_op" value="<?php echo $v['cr_id']?>" <?php if($this->request->get('crid') == $v['cr_id']) echo 'selected="selected"'?>><?php echo $v['cr_name']?></option>
+                  <?php endforeach;?>  
+                  </select>
+                    <span class="help-inline"></span>
+                  </div>
+            </div>
+            <div class="control-group">
+                  <label class="control-label"><small class="text-error"> * </small> 有效期开始时间</label>
+                  <div class="controls">
+                    <input type="text"  name="starTime"   id ="start_uploadtime" class="required"  value="<?php echo $this->request->get('starTime');?>"/>
+                    <span class="help-inline"></span>
+                  </div>
+            </div>
+            <div class="control-group">
+                  <label class="control-label"><small class="text-error"> * </small> 有效期结束时间 </label>
+                  <div class="controls">
+                    <input type="text"  name="endTime"  id="end_uploadtime" class="required"  value="<?php echo $this->request->get('endTime');?>" />
+                    <span class="help-inline"></span>
+                  </div>
+            </div>
+            <div class="control-group">
+                 <label class="control-label"><small class="text-error" class="required" > * </small> 状态 </label>
+                    <div class="controls">
+                 <select name="status">
+                    <option class="change_op" value="1" <?php if($this->request->get('status') == '1') echo 'selected="selected"'?>>可用</option>
+                    <option class="change_op" value="3" <?php if($this->request->get('status') == '3') echo 'selected="selected"'?>>禁用</option>
+                </select>
+                 </div>
+            </div>
+                <button type="submit" id="form_submit" class="btn">确认提交</button>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script >
+    seajs.use("<?php echo $this->di['sysconfig']['staticServer'];?>js/modules/coupons/main");
+    seajs.use("<?php echo $this->di['sysconfig']['staticServer'];?>js/spm_modules/jquery-plugin/jquery.validate.js");
+    seajs.use("<?php echo $this->di['sysconfig']['staticServer'];?>js/modules/coupons/couponsValidate");
+</script>

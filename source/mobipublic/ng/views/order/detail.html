@@ -1,0 +1,101 @@
+    <div class="order-bg">
+      <div class="detail-sum">
+        <div class="mb-w auto">
+          <p><span class="fl">订单号：</span><span>{{orderDetail.order_sn}}</span></p>
+          <p><span class="fl">订单金额：</span><span><em>￥{{orderDetail.order_paied}}</em></span></p>
+          <p><span class="fl">支付方式：</span><span>在线支付</span></p>
+          <p><span class="fl">订单时间：</span><span>{{orderDetail.order_addtime* 1000 | date: 'yyyy-MM-dd HH:mm:ss'}}</span></p>
+          <div class="btn-row">
+            <a class="btn btn-blue" ng-class="{'disabled':!(orderDetail.order_delivery_status == 3 && orderDetail.order_pay_status == 3)}"
+            ng-click="act(orderDetail.order_pay_status, orderDetail.order_delivery_status, orderDetail.order_sn)">
+              确认收货
+            </a>
+            <a class="btn btn-blue" href ng-click="actApply(orderDetail.order_status, orderDetail.order_sn)" ng-class="{'disabled':orderDetail.order_status != 11}">申请售后</a>
+          </div>
+        </div>
+      </div>
+      <div class="order-detail-list">
+        <div class="mb-w auto">
+          <div class="cart-list" ng-repeat="item in orderGoods">
+            <div class="cart-main">
+              <div class="shoes-type">
+                <img src="{{item.attrs_img}}" alt="shoes-type">
+              </div>
+              <div class="cart-info">
+                <p class="tit">{{item.goods_name}}</p>
+                <p class="detail">颜色：{{item.attrs_info[0].name}}      尺码：{{item.attrs_info[1].name}}码</p>
+                <p class="price">￥{{item.ord_goods_price}} ×{{item.ord_goods_num}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="price-summary">
+            <div class="mb-w auto fix">
+              <div class="fr">
+                <p><span class="fl">商品总价：</span><span>￥{{orderDetail.order_total}}</span></p>
+                <p><span class="fl">优惠金额：</span><span>￥{{orderDetail.order_pay_off}}</span></p>
+                <p><span class="fl">运费：</span><span>￥{{orderDetail.order_shipping_fee}}</span></p>
+                <p><span class="fl">实付金额：</span><span><em>￥{{orderDetail.order_paied}}</em></span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-tit-row">
+        <div class="mb-w auto">收货地址</div>
+      </div>
+      <div class="detail-content-row">
+        <div class="mb-w auto">
+          <p>{{orderDetail.order_consignee}}，{{orderDetail.order_mobile?orderDetail.order_mobile:orderDetail.order_tel}}</p>
+          <p>{{orderDetail.pro_name}} {{orderDetail.city_name}} {{orderDetail.dis_name}}，{{orderDetail.order_addr}}</p>
+        </div>
+      </div>
+
+      <div class="detail-tit-row">
+        <div class="mb-w auto">物流信息</div>
+      </div>
+      <div class="detail-content-row">
+        <div class="mb-w auto">
+           <p ng-show="orderDetail.order_shipping_id"> {{orderDetail.order_shipping_type}} 物流号码:{{orderDetail.order_shipping_sn}}</p>
+           <p ng-show="!orderDetail.order_shipping_id"> 暂未发货 </p>
+ <!--         <div class="btn-fold">
+            <a href="javascript:void(0);" title="收起物流信息">收起物流信息 <img class="vam" src="/img/ng/arrow-s-up.png" alt="close"></a>
+          </div>
+          <ul class="express-list-main">
+            <li class="express-list">
+              <div class="time-line">2014-06-20 19:44:32</div>
+              <div class="desc-line">由【天津公司】发往【福建厦门航空部】 </div>
+            </li>
+            <li class="express-list">
+              <div class="time-line">2014-06-20 16:44:32</div>
+              <div class="desc-line">由【天津河东一公司】发往【天津航空部】 </div>
+            </li>
+            <li class="express-list">
+              <div class="time-line">2014-06-20 19:44:32</div>
+              <div class="desc-line">卖家已发货</div>
+            </li>
+          </ul> -->
+        </div>
+      </div>
+
+      <div class="detail-tit-row">
+        <div class="mb-w auto">买家留言</div>
+      </div>
+      <div class="detail-content-row">
+        <div class="mb-w auto">
+          <p>{{orderDetail.order_buyer_msg}}</p>
+        </div>
+      </div>
+
+      <div class="detail-tit-row" ng-if="orderDetail.order_is_inv == 3">
+        <div class="mb-w auto">发票信息</div>
+      </div>
+      <div class="detail-content-row detail-ticket" ng-if="orderDetail.order_is_inv == 1">
+        <div class="mb-w auto">
+          <p><span class="fl">发票类型：</span><span>{{orderDetail.order_inv_type == 3 ? '个人' : '公司'}}</span></p>
+          <p><span class="fl">发票抬头：</span><span>{{orderDetail.order_inv_title}}</span></p>
+          <p><span class="fl">发票内容：</span><span>鞋子</span></p>
+        </div>
+      </div>
+
+    </div>

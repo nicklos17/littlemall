@@ -1,0 +1,87 @@
+<div class="w auto">
+    <!-- 公共面包屑开始 -->
+    <div class="crumbs-nav"><a href="#">首页</a>
+        <em>></em><a href="#">订单中心</a>
+        <em>></em><a href="#">优惠券</a>
+    </div>
+    <!-- 公共面包屑结束 -->
+    <!-- 主体部分开始 -->
+    <div class="content ovh">
+        <!-- 侧边栏导航开始 -->
+        <?php $this->partial("common/nav") ?>
+        <!-- 侧边栏导航结束 -->
+        <!-- 正文部分开始 -->
+        <div class="main fl dib">
+            <div class="info-tit rel">
+                <h2 class="tit dib">我的优惠券</h2>
+                <div class="coupons-type dib abs">
+                    <a <?php if($this->request->get('act')== '' or $this->request->get('act') == 'all') echo 'class="cur"';?> href="?act=all<?php echo $this->request->get('page')?'&page='.$this->request->get('page'):'';?>">所有优惠券</a>
+                    <em>|</em><a <?php if($this->request->get('act') == 'usable') echo 'class="cur"';?> href="?act=usable<?php echo $this->request->get('page')?'&page='.$this->request->get('page'):'';?>">未使用</a><!-- (<span class="red"></span>) -->
+                    <em>|</em><a <?php if($this->request->get('act') == 'used') echo 'class="cur"';?> href="?act=used<?php echo $this->request->get('page')?'&page='.$this->request->get('page'):'';?>">已使用</a>
+                    <em>|</em><a <?php if($this->request->get('act') == 'expire') echo 'class="cur"';?> href="?act=expire<?php echo $this->request->get('page')?'&page='.$this->request->get('page'):'';?>">已过期</a>
+                </div>
+            </div>
+            <div class="order">
+                <?php if(empty($list)):?>
+                <div class="order-nodata tac">
+                    <img class="vam" src="<?=$this->di['sysconfig']['staticServer']?>images/mall/order-no-notice.jpg" alt="您目前还没可查看的售后记录">&nbsp;您目前还没优惠券
+                </div>
+                <?php else:?>
+                <table class="table coupons-table-4">
+                    <thead>
+                    <tr>
+                        <th class="col-1">
+                            <div class="bd-right">优惠券</div>
+                        </th>
+                        <th class="col-2">
+                            <div class="bd-right">使用条件</div>
+                        </th>
+                        <th class="col-3">
+                            <div class="bd-right">有效期限</div>
+                        </th>
+                        <th class="col-4">
+                            <div>使用状态</div>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach($list as $v): ?>
+                    <tr class="table-data  <?php if($v['cp_end_time'] < $_SERVER['REQUEST_TIME']) echo "disabled";?>">
+                        <td  class="col-1">
+                            <div class="coupons-normal auto">
+                                <p>￥<strong><?= json_decode($v['cr_info'],true)['amount']?></strong></p>
+                            </div>
+                        </td>
+                        <td class="col-2">
+                             <?= json_decode($v['cr_info'],true)['minAmount']?'订单满 ￥'.json_decode($v['cr_info'],true)['minAmount'].'（不包含邮费）':'无限制' ?>
+                        </td>
+                        <td class="col-3">
+                            <?= date('Y-m-d',$v['cp_start_time'])?> 至 <?= date('Y-m-d',$v['cp_end_time'])?>
+                        </td>
+                        <td class="col-4">
+                             <?php if($v['cp_used_time']):?>
+                                <p class="muted">已使用</p>
+                            <?php elseif($v['cp_status'] == '3'):?>
+                             <p class="muted">已禁用</p>
+                            <?php elseif($v['cp_end_time'] < $_SERVER['REQUEST_TIME']):?>
+                                <p class="muted">已过期</p>
+                            <?php elseif($v['cp_start_time'] < $_SERVER['REQUEST_TIME']):?>
+                                <p class="muted">待开启</p>
+                            <?php elseif($v['cp_status'] == '1'):?>
+                            <a href="http://mall.yunduo.com" class="btn-coupons-use">立即使用</a>
+                            <?php endif;?>
+                        </td>
+                    </tr>
+                    <?php endforeach;?>
+
+                    </tbody>
+                </table>
+            </div>
+            <?php endif;?>
+            <div class="pages-nav fr fix">
+                <?php echo $page;?>
+            </div>
+        </div>
+        <!-- 正文部分结束 -->
+    </div>
+    </div>

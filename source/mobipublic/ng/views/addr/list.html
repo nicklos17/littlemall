@@ -1,0 +1,18 @@
+    <div class="order-bg">
+
+      <div class="address-main">
+        <div class="address-list rel" ng-repeat="addr in addrList">
+          <div class="main-box">
+            <div class="hd">{{addr.u_addr_consignee}} <span class="fr">{{addr.u_addr_mobile?addr.u_addr_mobile:addr.u_addr_tel}}</span></div>
+            <div class="bd">
+              <span class="default" ng-show="addr.u_addr_default==3">[默认地址] </span>{{addr.pro_name+addr.city_name+addr.dis_name+addr.u_addr_info}}
+            </div>
+          </div>
+          <div class="arrows-right" ng-click="editAddr(addr.u_addr_id)"></div>
+        </div>
+        <div class="address-list">
+          <p><a class="btn-addnew" href="#/addrAdd" title="添加新地址"><img class="vam" src="/img/ng/icon-add.png" alt="add"><span class="vam">添加新地址</span></a></p>
+        </div>
+      </div>
+
+    </div>

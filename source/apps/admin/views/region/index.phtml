@@ -1,0 +1,53 @@
+<div>
+    <div class="page-header">
+        <h1>
+            <a href="/region">地区管理</a>
+        </h1>
+    </div>
+    <p id="crumbs">
+        <a href="javascript:void(0);" id="cr-country" class="label arrowed-right label-large">中国</a>
+    </p>
+    <div class="alert" style="padding: 15px;">
+            <select name="provinces" id="provinces"></select>
+            <select name="cities" id="cities"></select>
+            <select name="districts" id="districts"></select>
+            <select name="streets" id="streets"></select>
+            <input type="hidden" id="region-type" value="1"/>
+            <input type="hidden" id="pro-id" value="0"/>
+            <input type="hidden" id="city-id" value="0">
+            <input type="hidden" id="dis-id" value="0">
+    </div>
+    <div id = "yunduo-error-msg"></div>
+    <table class="table table-striped table-bordered table-hover table-condensed" style="margin-bottom:10px; width: 100%;" id="region-tb">
+        <tr>
+            <th class="center"><label><input type="checkbox" id="chk-all"><span class="lbl"></span></label></th>
+            <th class="center">名称</th>
+            <th class="center">代码</th>
+            <th class="center">操作</th>
+        </tr>
+    </table>
+
+    <p>
+        <button class="btn btn-primary btn-mini" id="del-sel">
+            <i class="icon-trash"></i>
+            删除选中
+        </button>
+        <span style="float: right;">
+            <!--<form id="region-form" style="float: right;">-->
+                <span class="valid_error" style="display: none;" id="bk-error"></span>
+                <input type="text" name="region-name" id="region-name" placeholder="地名" class="{required:true, maxlength:20}">&nbsp;
+                <input type="text" name="region-code" id="region-code" placeholder="地区代码" class="{maxlength:30}">
+                <button class="btn btn-mini " id="add-region"><i class="icon-plus"></i>添加</button>
+            <!--</form>-->
+        </span>
+    </p>
+</div>
+<script>
+    seajs.config({
+        base : "<?php echo $this->di['sysconfig']['staticServer'];?>js/",
+        alias:{
+            'region' : 'utils/region'
+        }
+    });
+    seajs.use(['modules/region/main']);
+</script>

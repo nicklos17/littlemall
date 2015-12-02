@@ -1,0 +1,397 @@
+<style type="text/css">
+.sku_ul,.thumb-ul {
+    list-style: none;
+}
+.sku_ul li {
+    margin-right: 10px;
+    //border: 1px solid #999;
+    color: #4D4D4D;
+    padding: 2px 8px;
+    line-height: 16px;
+    font-size: 12px;
+    float: left;
+    cursor: pointer;
+}
+.thumb-ul li {
+    margin-right: 10px;
+    padding: 2px 8px;
+    font-size: 12px;
+    float: left;
+}
+table.gridtable {
+    font-family: verdana,arial,sans-serif;
+    font-size:11px;
+    color:#333333;
+    border-width: 1px;
+    border-color: #666666;
+    border-collapse: collapse;
+}
+table.gridtable th {
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #666666;
+    background-color: #dedede;
+}
+table.gridtable td {
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #666666;
+    background-color: #ffffff;
+}
+table th{
+     width :100px;
+     text-align: center;
+}
+em{
+   font-style: normal;
+}
+</style>
+ <div class="row-fluid" id="xxx">
+     <div class="span12">
+         <div class="widget-box">
+             <div class="widget-header widget-header-blue widget-header-flat">
+                 <h4 class="lighter">
+                 添加商品</h4>
+            </div>
+            <div id = "yunduo-error-msg">
+
+            </div>
+             <div class="widget-body">
+                 <div class="widget-main">
+           <div class="row-fluid">
+             <form id = "item-form" class="form-horizontal" action="updateitem" method="POST" enctype="multipart/form-data">
+
+            <div class="control-group">
+                 <label class="control-label"><small class="text-error" > * </small> 所属分类 </label>
+                    <div class="controls">
+                        <?php echo $cateList;?>
+                        <span class="help-inline"></span>
+                    </div>
+            </div>
+
+            <div class="control-group">
+                  <label class="control-label"><small class="text-error"> * </small> 商品名称 </label>
+                  <div class="controls">
+                    <input type="hidden" name="goods_id" value="<?=$goodsInfo['goods_id']?>" />
+                    <input type="text" value="<?=$goodsInfo['goods_name']?>" name="goods_name" id="goods-name" class="required"/>
+                    <span class="help-inline"></span>
+                  </div>
+            </div>
+
+            <div class="control-group">
+                  <label class="control-label"> 商品简介 </label>
+                  <div class="controls">
+                    <textarea  name="goods_brief"><?=$goodsInfo['goods_brief']?></textarea>
+                    <span class="help-inline"></span>
+                  </div>
+            </div>
+
+            <div class="control-group">
+                  <label class="control-label"><small class="text-error"> * </small> 商品货号 </label>
+                  <div class="controls">
+                    <input type="text" value="<?=$goodsInfo['goods_sn']?>" name="goods_sn" id="goods-sn" class="required"/>
+                    <span class="help-inline">货号必须唯一</span>
+                  </div>
+            </div>
+
+            <div class="control-group">
+                  <label class="control-label"> 字体样式选择 </label>
+                  <div class="controls">
+                        <input type="radio" checked="checked" value="" name="goods_name_style" /><span class="lbl">默认</span>
+                        <input type="radio"  value="font:13px;color:red" <?php echo $goodsInfo['goods_name_style'] == 'font:13px;color:red'?'checked':'';?> name="goods_name_style" /><span class="lbl" style="color:red;font-size:13px">看</span>
+                        <input type="radio"  value="font:14px;color:blue" <?php echo $goodsInfo['goods_name_style'] == 'font:14px;color:blue'?'checked':'';?> name="goods_name_style" /><span class="lbl" style="font:14px;color:blue">再看看</span>
+                        <input type="radio"  value="font:14px;color:green;font-weight:bold" <?php echo $goodsInfo['goods_name_style'] == 'font:14px;color:green;font-weight:bold'?'checked':'';?> name="goods_name_style" /><span class="lbl" style="font:14px;color:green;font-weight:bold">喜欢吗</span>
+                    <span class="help-inline"></span>
+                  </div>
+            </div>
+
+            <div class="control-group">
+                  <label class="control-label"> 点击数 </label>
+                  <div class="controls">
+                    <input type="text" value="<?=$goodsInfo['goods_clicks']?>" class="required number" name="goods_clicks"/>
+                    <span class="help-inline"></span>
+                  </div>
+            </div>
+
+            <div class="control-group">
+                  <label class="control-label"> 卖出数 </label>
+                  <div class="controls">
+                    <input type="text" value="<?=$goodsInfo['goods_sales']?>" class="required number" name="goods_sales"/>
+                    <span class="help-inline"></span>
+                  </div>
+            </div>
+
+            <div class="control-group">
+                  <label class="control-label"><small class="text-error"> * </small> 市场价 </label>
+                  <div class="controls">
+                    <input type="text" class="required number" value="<?=$goodsInfo['goods_market']?>" name="goods_market"/>
+                    <span class="help-inline">精确到0.01元</span>
+                  </div>
+            </div>
+
+            <div class="control-group">
+                  <label class="control-label"><small class="text-error"> * </small> 本店价 </label>
+                  <div class="controls">
+                    <input type="text" class="required number" value="<?=$goodsInfo['goods_price']?>" name="goods_price"/>
+                    <span class="help-inline">精确到0.01元</span>
+                  </div>
+            </div>
+
+            <div class="control-group">
+                  <label class="control-label"> 促销价 </label>
+                  <div class="controls">
+                    <input type="text" class="number" value="<?=$goodsInfo['goods_promote']?>" name="goods_promote"/>
+                    <span class="help-inline">精确到0.01元</span>
+                  </div>
+            </div>
+
+            <div class="control-group">
+                  <label class="control-label"> 促销开始时间 </label>
+                  <div class="controls">
+                    <input type="text" value="<?=date('Y-m-d H:i:s', $goodsInfo['goods_promote_start'])?>" name="goods_promote_start" id="start-promote-time" />
+                    <span class="help-inline"></span>
+                  </div>
+            </div>
+
+            <div class="control-group">
+                  <label class="control-label">促销结束时间 </label>
+                  <div class="controls">
+                    <input type="text" value="<?=date('Y-m-d H:i:s', $goodsInfo['goods_promote_end'])?>" name="goods_promote_end" id="end-promote-time"/>
+                    <span class="help-inline"></span>
+                  </div>
+            </div>
+
+            <div class="control-group">
+                  <label class="control-label"><small class="text-error"> * </small> 上架时间 </label>
+                  <div class="controls">
+                    <input type="text" class="required" value="<?=date('Y-m-d H:i:s', $goodsInfo['goods_start'])?>" name="goods_start" id="start-time"/>
+                    <span class="help-inline"></span>
+                  </div>
+            </div>
+
+            <div class="control-group">
+                  <label class="control-label"><small class="text-error"> * </small> 下架时间 </label>
+                  <div class="controls">
+                    <input type="text" class="required" value="<?=date('Y-m-d H:i:s', $goodsInfo['goods_end'])?>" name="goods_end" id="end-time" />
+                    <span class="help-inline"></span>
+                  </div>
+            </div>
+
+            <div class="control-group">
+                  <label class="control-label"> 标签 </label>
+                  <div class="controls">
+                    <input type="text" value="<?=$goodsInfo['goods_tags']?>" name="goods_tags"/>
+                    <span class="help-inline">填写商品标签，不超过５个，以半角,隔开</span>
+                  </div>
+            </div>
+
+            <div class="control-group">
+                  <label class="control-label"> 商品详细介绍 </label>
+                  <div class="controls">
+                        <script type="text/plain" id="good-desc" name = "goods_desc" style="width:1200px;height:240px;"><?=htmlspecialchars_decode($goodsInfo['goods_desc'])?></script>
+                    <span class="help-inline"></span>
+                  </div>
+            </div>
+
+            <div class="control-group">
+                  <label class="control-label"><small class="text-error"> * </small> 商品图 </label>
+                  <div class="controls">
+                    <input type="file"  name="goods_img"/>
+                    <span class="help-inline"><img  src="<?=$goodsInfo['goods_img']?>" style="width: 100px;"></span>
+
+                  </div>
+            </div>
+
+            <div class="control-group">
+                  <label class="control-label"><small class="text-error"> * </small> 商品缩略图 </label>
+                  <div class="controls">
+                          <ul class = "thumb-ul">
+                          <?php $len = 0; if($goodsInfo['goods_pics']):
+                            $pics = explode(',', $goodsInfo['goods_pics']);
+                            $len = count($pics);
+                            for ($i = 0; $i < $len; $i++){?>
+                              <li>
+                                  <div><a href="javascript:void(0);" class="del-img">[x]</a></div>
+                                  <img src="<?=$pics[$i]?>">
+                              </li>
+                          <?php } endif;?>
+                    </ul>
+
+                    <table width="100%" id="thumb-table" style="display: table;" align = "left">
+                          <tbody>
+                          <?php if($len < 5):?>
+                            <tr>
+                              <td>
+                                <a href="javascript:void(0);" class="add-img">[+]</a>
+                                上传文件 <input type="file" name="goods_pics[]">
+                              </td>
+                            </tr>
+                          <?php endif;?>
+                           <tr>
+                          </tr>
+                    </tbody>
+                  </table>
+                    <span class="help-inline">
+                    </span>
+                  </div>
+            </div>
+
+                  <div class="control-group">
+                        <label for="form-field-1" class="control-label">
+                            <small class="text-error" > * </small>商品状态</label>
+                        <div class="controls">
+                          <input type="radio"  value="1" <?=$goodsInfo['goods_status'] == 1?'checked':''?> name="goods_status" /><span class="lbl">销售</span>
+                          <input type="radio" value="3" <?=$goodsInfo['goods_status'] == 3?'checked':''?> name="goods_status" /><span class="lbl">预售</span>
+                           <span class="help-inline"></span>
+                        </div>
+                  </div>
+
+            <div class="control-group">
+                  <label class="control-label"><small class="text-error"> * </small> 商品类型 </label>
+                  <div class="controls">
+                        <input type="radio" checked="checked" value="1" <?=$goodsInfo['goods_type']==1?'checked':''?> name="goods_type" /><span class="lbl">非赠品或配件</span>
+                          <input type="radio" value="3" <?=$goodsInfo['goods_type']==3?'checked':''?> name="goods_type" /><span class="lbl">赠品或配件</span>
+                           <span class="help-inline"></span>
+                  </div>
+            </div>
+
+            <div class="control-group">
+                  <label class="control-label"><small class="text-error"> * </small> 排序 </label>
+                  <div class="controls">
+                    <input type="text" value="<?=$goodsInfo['goods_order']?>" name="goods_order"/>
+                    <span class="help-inline">数值越大排越前面</span>
+                  </div>
+            </div>
+
+            <div class="control-group">
+                  <label class="control-label"><small class="text-error"> * </small> 是否新品 </label>
+                  <div class="controls">
+                        <input type="radio" checked="checked" value="1" <?=$goodsInfo['goods_is_new']==1?'checked':''?> name="goods_is_new" /><span class="lbl">非新品</span>
+                          <input type="radio" value="3" <?=$goodsInfo['goods_is_new']==3?'checked':''?> name="goods_is_new" /><span class="lbl">新品</span>
+                           <span class="help-inline"></span>
+                  </div>
+            </div>
+
+            <div class="control-group">
+                  <label class="control-label"><small class="text-error"> * </small> 是否促销 </label>
+                  <div class="controls">
+                        <input type="radio" checked="checked" value="1" <?=$goodsInfo['goods_is_promote']==1?'checked':''?> name="goods_is_promote" /><span class="lbl">非促销</span>
+                          <input type="radio" value="3" <?=$goodsInfo['goods_is_promote']==3?'checked':''?> name="goods_is_promote" /><span class="lbl">促销</span>
+                           <span class="help-inline"></span>
+                  </div>
+            </div>
+
+            <div class="control-group">
+                  <label class="control-label"><small class="text-error"> * </small> 是否热销 </label>
+                  <div class="controls">
+                        <input type="radio" checked="checked" value="1" <?=$goodsInfo['goods_is_hot']==1?'checked':''?> name="goods_is_hot" /><span class="lbl">非热销</span>
+                          <input type="radio" value="3" <?=$goodsInfo['goods_is_hot']==3?'checked':''?> name="goods_is_hot" /><span class="lbl">热销</span>
+                           <span class="help-inline"></span>
+                  </div>
+            </div>
+
+            <div class="control-group">
+                  <label class="control-label"><small class="text-error"> * </small> 是否保修 </label>
+                  <div class="controls">
+                        <input type="radio" checked="checked" value="1" <?=$goodsInfo['goods_is_warranty']==1?'checked':''?> name="goods_is_warranty" /><span class="lbl">是</span>
+                          <input type="radio" value="3" <?=$goodsInfo['goods_is_warranty']==3?'checked':''?> name="goods_is_warranty" /><span class="lbl">否</span>
+                           <span class="help-inline"></span>
+                  </div>
+            </div>
+
+            <div class="control-group">
+                  <label class="control-label"><small class="text-error"> * </small> 是否包邮 </label>
+                  <div class="controls">
+                        <input type="radio" checked="checked" value="1" <?=$goodsInfo['goods_is_shipping']==1?'checked':''?> name="goods_is_shipping" /><span class="lbl">是</span>
+                          <input type="radio" value="3" <?=$goodsInfo['goods_is_shipping']==3?'checked':''?> name="goods_is_shipping" /><span class="lbl">否</span>
+                           <span class="help-inline"></span>
+                  </div>
+            </div>
+
+            <div class="control-group">
+                  <label class="control-label"><small class="text-error"> * </small> 属性选择 </label>
+                  <div class="controls">
+                        <table cellspacing="5" cellpadding="0" border="0" style="text-align: center;">
+                          <tbody>
+                          <?php foreach ($attrList as $attrs):?>
+                            <tr>
+                              <td height="60" data-id="<?=$attrs['attrs_id']?>" data-name="<?=$attrs['attrs_name']?>" ><input type="hidden" value="<?=$attrs['attrs_id']?>" name="goods-attrs[]" /><?=$attrs['attrs_name']?>:</td>
+                              <td>
+                              <?php if(!empty($attrs['child'])):?>
+                                <ul class="sku_ul">
+                                <?php foreach ($attrs['child'] as $attr) :?>
+                                  <li data-id="<?=$attr['attrs_id']?>" data-name="<?=$attr['attrs_name']?>">
+                                            <input type="checkbox" class="attr-checked">
+                                            <span class="lbl"><?=$attr['attrs_name']?></span>
+                                            <span class="attr-img"></span>
+                                            <?php
+                                                $gaAttrs = json_decode($goodsGaAttrs, true);
+                                                if(!strstr($attrs['attrs_name'], '尺') && array_key_exists($attr['attrs_id'], $gaAttrs)):
+                                              ?>
+                                              <p><a href="javascript:void(0);" class="attr-img-edit">修改属性图</a></p>
+                                            <?php endif;?>
+                                  </li>
+                              <?php endforeach;?>
+                                </ul>
+                            <?php endif;?>
+                                </td>
+                            </tr>
+                          <?php endforeach ?>
+                          </tbody>
+                        </table>
+                           <span class="help-inline"></span>
+                  </div>
+                  <div class="controls">
+                        <a href="javascript:void(0)" class="btn btn-warning" id="attr-generate">生成商品属性组合列表</a>
+                  </div>
+            </div>
+
+            <div class="control-group" id="goog-attr-table">
+                  <label class="control-label">组合属性表 </label>
+                  <div class="controls">
+                      <table class="gridtable">
+                        <th>颜色/尺码</th>
+                        <th>条形码</th>
+                        <th>库存数量</th>
+                        <th>是否可用</th>
+                        <th>可卖数</th>
+                        <th>操作</th>
+                        <tbody>
+                        <?php foreach($goodsAttrs as $val) :$attrJson[$val['attrs_ids']] = $val;?>
+                            <tr>
+                                <input type="hidden" class="attrs_ids"  value="<?=$val['attrs_ids']?>"/>
+                                <td><?=$val['g_attr_names']?></td>
+                                <td><input type="text"  class="attrs_barcode" value="<?=$val['g_attr_barcode']?>"/></td>
+                                <td><input type="text"  class="attrs_stocks" value="<?=$val['g_attr_stocks']?>"/></td>
+                                <td>
+                                  <select class="attrs_enabled" name="g_attr_enable[]">
+                                    <option value="1" <?php echo $val['g_attr_enable'] == 1?'selected':''?>>可用</option>
+                                    <option value="3" <?php echo $val['g_attr_enable'] == 3?'selected':''?>>不可用</option>
+                                  </select>
+                                </td>
+                                <td><input type="text" class="attrs_nums" value="<?=$val['g_attr_nums']?>"/></td>
+                                <td><button type="button"  class="btn attr-alter">确认</button></td>
+                            </tr>
+                        <?php endforeach;?>
+                        <tbody>
+                      </table>
+                  </div>
+                </div>
+                <button type="submit"  class="btn">确认提交</button>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<script >
+    $("select[name='gcat_id']").val("<?=$goodsInfo['gcat_id']?>");
+    var gaAttrs = <?=$goodsGaAttrs?>, gaAttrsImg = <?=$gaAttrsImg?>, gAttrs = <?=json_encode($attrJson)?>;
+    seajs.use("<?php echo $this->di['sysconfig']['staticServer'];?>js/spm_modules/jquery-plugin/jquery.validate.js");
+    seajs.use("<?php echo $this->di['sysconfig']['staticServer'];?>js/modules/item/edit");
+    seajs.use("<?php echo $this->di['sysconfig']['staticServer'];?>js/spm_modules/jquery-plugin/ajaxfileupload.js");
+</script>

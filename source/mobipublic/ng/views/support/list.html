@@ -1,0 +1,26 @@
+<div class="mb-w auto my-order-list service-order">
+  <div class="cart-list" ng-repeat="l in list">
+    <div class="cart-main">
+      <div class="shoes-type">
+        <p><img src="{{l.attrs_img}}" alt="shoes-type"></p>
+      </div>
+      <div class="cart-info">
+        <p class="tit">售后单号:{{l.bord_sn}}</p>
+        <p class="detail"><span>订单号:{{l.order_sn}} </span> 申请于 {{l.bord_addtime* 1000 | date: 'yyyy-MM-dd HH:mm:ss'}}</p>
+        <p class="tit"><span ng-repeat="g in l.attrArr">{{g.type}}:{{g.name}}&nbsp;&nbsp;</span></p>
+        <p class="apply-state">{{l.bord_status}}</p>
+        <p class="warning-desc" ng-if="l.bord_status=='审核未通过'">很抱歉，由于您的鞋子已经穿过，影响二次销售，您的审核未通过。如有疑异，请与客服联系：400-0000-400</p>
+        <p class="warning-desc" ng-if="l.bord_status=='已审核' && !l.user_shipping_sn">您的售后申请已通过审核，请尽快邮寄童鞋到云朵售后服务部</p>
+        <p class="warning-desc" ng-if="l.bord_status=='已审核' && l.user_shipping_sn">您已邮寄童鞋到云朵售后服务部, 请等待我们查收处理</p>
+        <p class="warning-desc" ng-if="l.bord_status=='进行中'">亲爱的客户，我们已经收到您邮寄回来的鞋子，符合退货条件，我们已为您处理，请注意查收。</p>
+        <p class="warning-desc" ng-if="l.bord_status=='进行中' && !l.user_shipping_sn">您已提交快递单号，物品到达后我们会第一时间处理。</p>
+        <p><a href="javascript:void(0);" ng-if="l.bord_status=='已审核' && !l.user_shipping_sn" ng-click="addShippingSn(l.bord_sn)" class="btn-submit-express">提交快递单号</a></p>
+      </div>
+      <!--<div class="arrows-right"></div>-->
+    </div>
+  </div>
+  </div>
+</div>
+<div class="btn-more" ng-show="more">
+  <a class="more" ng-click="getMore()" href="javascript:void(0);" title="显示更多订单">显示更多售后订单</a>
+</div>

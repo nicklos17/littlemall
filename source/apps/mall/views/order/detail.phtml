@@ -1,0 +1,258 @@
+<div class="w auto">
+    <!-- 公共面包屑开始 -->
+    <div class="crumbs-nav"><a href="#">首页</a>
+      <em>></em><a href="#">订单中心</a>
+      <em>></em><a href="#">我的订单</a>
+      <em>></em><a href="#">订单详情</a>
+    </div>
+    <!-- 公共面包屑结束 -->
+    <!-- 主体部分开始 -->
+    <div class="content ovh">
+      <!-- 侧边栏导航开始 -->
+    <?php $this->partial("common/nav") ?>
+
+      <!-- 侧边栏导航结束 -->
+      <!-- 正文部分开始 -->
+      <div class="main fl dib">
+        <div class="info-tit rel">
+          <h2 class="tit order-id dib">订单编号 : <?php echo $orderInfo['order_sn']?></h2>
+        </div>
+        <div class="order">
+          <table class="table table-col-4">
+            <tbody>
+              <tr class="blank-row"></tr>
+              <?php foreach($orderGoods as $k =>$v):?>
+              <?php if(count($orderGoods) == 1):?>
+              <tr class="table-data <?php echo $k==0 ?'tr-hd' : '';?>">
+                <td class="col-1">
+                  <img class="order-item-pic dib fl" style="width:80px;height:auto" src="<?php echo $v['attrs_img'];?>" alt="云朵智能童鞋">
+                  <div class="order-item-desc dib" style="margin-top:30px">
+                    <p class="order-item-name"><?=$v['goods_name']?>, <?=$v['attrs_barcode']?></p>
+                  </div>
+                </td>
+                <td class="col-2 tac c-grey">
+                  <p>颜色: <?php echo json_decode($v['attrs_info'],true)[0]['name'] ?></p>
+                  <p>尺码: <?php echo json_decode($v['attrs_info'],true)[1]['name'] ?>码</p>
+                </td>
+                <td class="col-3 right-bd tac">
+                  <?php echo $v['ord_goods_price'].' X '.$v['ord_goods_num']?>
+                </td>
+                <td rowspan="<?php echo count($orderGoods);?>" class="col-4 tac col-last">
+                <?php if($orderInfo['order_status'] == 11):?>
+                  <div class="trade-status">
+                    <p><a href="/support/apply?orderSn=<?=$orderInfo['order_sn']?>" class="tdn">申请售后</a>
+                    </p>
+                  </div>
+                <?php endif;?>
+                </td>
+              </tr>
+
+            <?php elseif(count($orderGoods)>1):?>
+              <tr class="table-data <?php echo $k==0 ?'tr-hd' : '';?>">
+                <td class="col-1">
+                  <img class="order-item-pic dib fl" style="width:80px;height:auto" src="<?php echo $v['attrs_img'];?>" alt="云朵智能童鞋">
+                  <div class="order-item-desc dib" style="margin-top:30px">
+                    <p class="order-item-name"><?php echo $v['goods_name']?>, <?=$v['attrs_barcode']?></p>
+                  </div>
+                </td>
+                <td class="col-2 tac c-grey">
+                  <p>颜色: <?php echo json_decode($v['attrs_info'],true)[0]['name'] ?></p>
+                  <p>尺码: <?php echo json_decode($v['attrs_info'],true)[1]['name'] ?>码</p>
+                </td>
+                <td class="col-3 right-bd tac">
+                  <?php echo $v['ord_goods_price'].' X '.$v['ord_goods_num']?>
+                </td>
+                      <?php if($k== 0):?>
+                <td rowspan="<?php echo count($orderGoods);?>" class="col-4 tac col-last">
+                <?php if($orderInfo['order_status'] == 11):?>
+                  <div class="trade-status">
+                    <p><a href="/support/apply?orderSn=<?=$orderInfo['order_sn']?>" class="tdn">申请售后</a>
+                    </p>
+                  </div>
+                <?php endif;?>
+                </td>
+              <?php endif;?>
+              </tr>
+            <?php endif;?>
+          <?php endforeach;?>
+
+        <?php 
+        //已付款
+        if($orderInfo['order_pay_status'] == 3)
+        {
+          $pay_green = 'green';
+         // $pay_time = date('Y-m-d H:i:s',$orderInfo['pay_time']);
+        }
+        else
+        {
+          $pay_green = '';
+         // $pay_time = '';
+        }
+        //发货
+        if($orderInfo['order_delivery_status'] >= 3)
+        {
+          $send_green = 'green';
+        //  $send_time = date('Y-m-d H:i:s',$orderInfo['shipping_time']);
+        }
+        else
+        {
+          $send_green = '';
+          //$send_time = '';
+        }
+        //收货
+        if($orderInfo['order_delivery_status'] == 5)
+        {
+          $receipt_green = 'green';
+          
+        }
+        else
+        {
+          $receipt_green = '';
+        }
+        //完成
+        if($orderInfo['order_status'] == 11)
+        {
+          $success_green = 'green';
+          
+        }
+        else
+        {
+          $success_green = '';
+        }
+        ?>
+              <tr class="table-data">
+                <td colspan="4" class="process-bd">
+                  <div class="process">
+                    <div class="process-status tac">
+                      <span class="dib pro-green">1</span>
+                      <span class="dib pro-line-grey <?php echo $pay_green;?>"></span>
+                      <span class="dib pro-grey <?php echo $pay_green;?>">2</span>
+                      <span class="dib pro-line-grey <?php echo $send_green;?>"></span>
+                      <span class="dib pro-grey <?php echo $send_green;?>">3</span>
+                      <span class="dib pro-line-grey <?php echo $receipt_green;?>"></span>
+                      <span class="dib pro-grey <?php echo $receipt_green;?>">4</span>
+                      <span class="dib pro-line-grey <?php echo $success_green;?>"></span>
+                      <span class="dib pro-grey <?php echo $success_green;?>">5</span>
+                    </div>
+                    <div class="process-desc tac">
+                      <div class="dib grey">
+                        <p class="green">下单</p>
+                        <p class="pro-time"><?php echo date('Y-m-d H:i:s', $orderInfo['order_addtime'])?></p>
+                      </div>
+                      <div class="dib grey">
+                        <p class="<?php echo $pay_green;?>">付款</p>
+                        <p class="pro-time"><?php echo empty($orderInfo['order_pay_time'])?'等待付款':date('Y-m-d H:i:s', $orderInfo['order_pay_time'])?></p>
+                      </div>
+                      <div class="dib grey">
+                        <p class="<?php echo $send_green;?>">发货</p>
+                      </div>
+                      <div class="dib grey">
+                        <p class="<?php echo $receipt_green;?>">收货</p>
+                      </div>
+                      <div class="dib grey">
+                        <p class="<?php echo $success_green;?>">成功</p>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+
+              <tr class="table-data">
+                <td class="col-1 col-first">
+                </td>
+                <td class="col-2">
+                </td>
+                <td class="col-3 tar">
+                  <div class="order-price">
+                    <p>商品总价：</p>
+                    <p>优惠金额：</p>
+                    <p>运费：</p>
+                    <p>实付金额：</p>
+                  </div>
+                </td>
+                <td class="col-4 col-last tar">
+                  <div class="order-price price-list">
+                    <p class="color"><?php echo $orderInfo['order_total']?>元</p>
+                    <p class="color"><?php echo $orderInfo['order_pay_off']?>元</p>
+                    <p class="color"><?php echo $orderInfo['order_shipping_fee']?>元</p>
+                    <p class="color">
+                      <strong><?php echo $orderInfo['order_paied']?>元</strong>
+                    </p>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="order-content">
+          <div class="info-tit rel">
+            <h2 class="tit dib">物流信息</h2>
+          </div>
+          <div class="order-main">
+          <?php if($orderInfo['order_shipping_id']):?>
+              <span>物流公司：<span id='expressName'><?php echo $this->di['sysconfig']['express'][$orderInfo['order_shipping_id']]?></span></span>
+              <span class="wuliuNo" >物流号码：<span id='wuliuNo'><?php echo $orderInfo['order_shipping_sn']?></span></span>
+            <div class="fr wuliu-info">
+              <a href="javascript:void(0);" class="view" id="wuliu-list">查看物流信息></a>
+              <!-- 鼠标划过出现物流信息 -->
+              <div class="wuliu-list dn" >
+                <div class="btn-close fr">×</div>
+                <div class="wuliu-tit">
+                  <span>物流公司：<?php echo $this->di['sysconfig']['express'][$orderInfo['order_shipping_id']]?></span>
+                  <span class="wuliu-id">物流号码：<?= $orderInfo['order_shipping_sn']?></span>
+                </div>
+                <div class="wuliu-detail">
+
+                </div>
+              </div>
+            </div>
+            <?php else:?>
+                <span>暂未发货</span>
+            <?php endif;?>
+          </div>
+        </div>
+
+        <div class="order-content">
+          <div class="info-tit rel">
+            <h2 class="tit dib">其他信息</h2>
+          </div>
+          <div class="order-main">
+            <div class="other-info">
+              <p>收货地址: <?php $tel = $orderInfo['order_mobile'] ? substr_replace($orderInfo['order_mobile'], '****', 4, -3) : $orderInfo['order_tel']; echo $orderInfo['order_consignee']. ' / ' . $tel . ' /  ';?>
+                <span class="order-province"></span><span class="order-city"></span><span class="order-district"></span><span class="order-street"></span>
+            <span class="addr"><?=$orderInfo['pro_name'] .'  '. $orderInfo['city_name'] .'  '. $orderInfo['dis_name'] .'  '. $orderInfo['order_addr']?></span>
+<!--             <span id="region-selector" style="display:none;">
+                <select id="provinces" data="<?php echo $orderInfo['order_province']?>"></select>
+                <select id="cities" data="<?php echo $orderInfo['order_city']?>"></select>
+                <select id="districts" data="<?php echo $orderInfo['order_district']?>"></select>
+                <select id="streets" data="<?php echo $orderInfo['order_street']?>"></select>
+            </span> -->
+              </p>
+              <p>买家留言: <?php echo $orderInfo['order_buyer_msg']?></p>
+              <?php if($orderInfo['order_is_inv'] == 1):?>
+                <p>发票类型:<?=$orderInfo['order_inv_type'] == 1 ? '公司' : '个人'?></p>
+                <p>发票抬头:<?=$orderInfo['order_inv_title']?></p>
+              <?php endif;?>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!-- 正文部分结束 -->
+    </div>
+    <!-- 主体部分结束 -->
+  </div>
+
+
+<script>
+    seajs.config({
+        base : "<?php echo $this->di['sysconfig']['staticServer'];?>js/",
+        alias: {
+            'region' : 'utils/region'
+        }
+    });
+    seajs.use(['spm_modules/jquery-plugin/jquery.validate', 'modules/front/order/detail']);
+
+</script>

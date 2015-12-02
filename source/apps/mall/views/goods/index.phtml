@@ -1,0 +1,417 @@
+  <div class="w auto">
+    <!-- 公共面包屑开始 -->
+    <div class="crumbs-nav"><a href="javascript:void(0)">首页</a>
+      <em>></em><a href="javascript:void(0)">商品详情</a>
+    </div>
+    <!-- 公共面包屑结束 -->
+    <!-- 主体部分开始 -->
+    <!-- 正文部分开始 -->
+    <div class="shoes-detail rel fix">
+<!--       售空<div class="shoes-zero abs">
+        <img src="<?php echo $this->di['sysconfig']['staticServer'];?>images/mall/shoes-sell-out.png" alt="此型号鞋子已售罄">
+      </div> -->
+
+      <div class="shoes-show rel fix" id="shoes-show">
+        <a href="javascript:void(0);" id="shoes-prev" class="abs"></a>
+        <a href="javascript:void(0);" id="shoes-next" class="abs"></a>
+        <ul class="slide shoes-slide">
+          <li class="active">
+            <img src=""><!-- id=shoes-1 -->
+          </li>
+        </ul>
+        <ul class="slide-nav fix">
+        <?php
+            $info = explode(',', $gInfo['goods_pics']);
+            $len = count($info);
+            for($i = 0; $i<$len; $i++)
+            {
+        ?>
+        <li>
+            <a href="javascript:void(0);" class="shoes-thumb">
+              <img src="<?=$info[$i]?>" id="thumb-<?=$i+1?>">
+            </a>
+        </li>
+        <?php
+            }
+        ?>
+        </ul>
+      </div>
+
+      <div class="shoes-show-detail rel fl">
+        <div class="shoes-show-tit">
+          <h2><?=$gInfo['goods_name']?></h2>
+          <p><?=$gInfo['goods_brief']?></p>
+        </div>
+        <div class="selected">
+          <div class="shoes-show-data fix">
+            <dl>
+              <div class="unselected dn">
+                <!-- 未选择商品而下一步时这个出现，首发价及文字隐藏 -->
+                <span id="selectgoods">请选择商品</span>
+                <span id="select-closed">x</span>
+              </div>
+              <div>
+                <dt>首发价</dt>
+                <dd>
+                  <span class="shoes-price"><?=$gInfo['goods_price']?>元</span>
+                </dd>
+              </div>
+              <?php
+                foreach ($gAttrs as $key => $val):
+                    if(strstr($val['attrs_name'], '尺')):
+              ?>
+              <div class="fix">
+              <dt id = "size" data-id = "<?=$val['attrs_id']?>"><?=$val['attrs_name']?></dt>
+              <dd id = "size-kinds" class="goods-size">
+              <?php
+                foreach ($gaAttrs as $ga => $gaval):
+                    if($gaval['gac_parent_id'] == $key):
+              ?>
+            <span class="shoes-size-id" id="size-<?=$gaval['attrs_id']?>" data-id="<?=$gaval['attrs_id']?>"><?=$gaval['attrs_name']?></span>
+            <?php
+                endif;endforeach;
+            ?>
+                <div id="shoes-size" class="dib rel">
+                  <div class="shoes-size-table abs dn" id="shoes-size-table">
+                    <table>
+                      <thead>
+                        <tr>
+                          <td colspan="13" class="tb-tit dib">
+                            <span>尺码对照表</span>
+                            <span class="tb-close" id="tb-close">x</span>
+                          </td>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr class="btm-bd">
+                          <td>
+                            <strong>码数</strong>
+                          </td>
+                          <td>25</td>
+                          <td>26</td>
+                          <td>27</td>
+                          <td>28</td>
+                          <td>29</td>
+                          <td>30</td>
+                          <td>31</td>
+                          <td>32</td>
+                          <td>33</td>
+                          <td>34</td>
+                          <td>35</td>
+                          <td>36</td>
+                          <td>37</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <strong>鞋内长度(mm)</strong>
+                          </td>
+                          <td>160</td>
+                          <td>167</td>
+                          <td>173</td>
+                          <td>180</td>
+                          <td>187</td>
+                          <td>193</td>
+                          <td>200</td>
+                          <td>207</td>
+                          <td>213</td>
+                          <td>220</td>
+                          <td>227</td>
+                          <td>233</td>
+                          <td>240</td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                  </div>
+                </div>
+              </dd>
+            </div>
+            <?php else:?>
+              <dt id = "color" data-id = "<?=$val['attrs_id']?>"><?=$val['attrs_name']?></dt>
+              <dd id="shoes-kinds">
+              <?php
+                foreach ($gaAttrs as $ga => $gaval):
+                    if($gaval['gac_parent_id'] == $key):
+                      if($gaval['attrs_img']):
+              ?>
+            <img src="<?=$gaval['attrs_img']?>" class="shoes-colors vam" id="shoes-<?=$gaval['attrs_id']?>" alt="<?=$gaval['attrs_name']?>" data-id="<?=$gaval['attrs_id']?>" style="padding:6px 1px">
+            <?php
+                  else:
+            ?>
+            <span class="color-size-text" data-id="<?=$gaval['attrs_id']?>"><?=$gaval['attrs_name']?></span>
+            <?php
+                endif;endif;endforeach;
+            ?>
+              </dd>
+            <?php endif;endforeach;?>
+            <?php if($codeFlag == 0):?>
+              <dt>数量</dt>
+              <dd>
+                <div class="change-goods-num">
+                  <a href="javascript:void(0)" class="num-reduce dib" id="num-reduce"><i>-</i></a>
+                  <input type="text" value="1" class="input-num" id="input-num" readonly="readonly">
+                  <a href="javascript:void(0)" class="num-add dib pressed" id="num-add"><i>+</i></a>
+                </div>
+              </dd>
+            </dl>
+            <?php else:?>
+              <dt>数量</dt>
+              <dd>
+                <div class="change-goods-num">
+                  <a href="javascript:void(0)" class="num-reduce disabled dib"><i>-</i></a>
+                  <input type="text" value="1" class="input-num" id="input-num" readonly="readonly">
+                  <a href="javascript:void(0)" class="num-add dib disabled"><i>+</i></a>
+                </div>
+              </dd>
+            <?php endif;?>
+            </dl>
+          </div>
+         <div class="shoes-show-btn">
+            <input type="button" class="btn bd-n btn-soon-buy" id="btn-soon-buy" value="立即购买">
+            <?php if($codeFlag == 0):?>
+                <input type="button" class="btn bd-n btn-add-cart" id="btn-add-cart" value="加入购物车">
+            <?php endif;?>
+            <input type="button" class="shoes-btn-next disabled dn" value="请勾选您要的鞋子信息！">
+            <a href="javascript:void(0)" onclick="javascript:window.open('http://b.qq.com/webc.htm?new=0&sid=4009189400&eid=218808P8z8p8p808R8R8y&o=yunduo.com&q=7&ref='+document.location, '_blank', 'height=544, width=644,toolbar=no,scrollbars=no,menubar=no,status=no');" class="qq-online"><img class="vam" src="<?php echo $this->di['sysconfig']['staticServer'];?>images/mall/thumb-qq.png" alt="qq">在线咨询</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+     <div class="shoes-data fix">
+      <div class="shoes-tit">
+        <span class="cur" id="detail-intro">详情介绍</span><em>|</em>
+        <span id="product-pram">产品参数</span>
+      </div>
+      <!-- 详情介绍开始 -->
+      <div class="detail-introduce">
+        <?=htmlspecialchars_decode($gInfo['goods_desc'])?>
+      </div>
+      <!-- 详情介绍结束 -->
+      <!-- 产品参数开始 -->
+      <div class="product-prameter dn">
+        <!-- <div class="shoes-parameter-introduce fix">
+          <div class="parameter-introduce-name color">
+            <p>鞋款</p>
+          </div>
+          <div class="parameter-introduce-content color">
+            <img src="<?php echo $this->di['sysconfig']['staticServer'];?>images/mall/shoes-style.jpg" alt="鞋款">
+          </div>
+        </div> -->
+
+        <div class="shoes-parameter-introduce fix">
+          <div class="parameter-introduce-name size">
+            <p>尺码对照表</p>
+          </div>
+          <div class="parameter-introduce-content size">
+            <div class="shoes-size-list ml20">
+              <table>
+                <tbody>
+                  <tr class="bottom-bd">
+                    <td class="size-tit">云朵尺码</td>
+                    <td>25</td>
+                    <td>26</td>
+                    <td>27</td>
+                    <td>28</td>
+                    <td>29</td>
+                    <td>30</td>
+                    <td>31</td>
+                    <td>32</td>
+                    <td>33</td>
+                    <td>34</td>
+                    <td>35</td>
+                    <td>36</td>
+                    <td>37</td>
+                  </tr>
+                  <tr class="bottom-bd">
+                    <td class="size-tit">云朵内长 (mm)</td>
+                    <td>160</td>
+                    <td>167</td>
+                    <td>173</td>
+                    <td>180</td>
+                    <td>187</td>
+                    <td>193</td>
+                    <td>200</td>
+                    <td>207</td>
+                    <td>213</td>
+                    <td>220</td>
+                    <td>227</td>
+                    <td>233</td>
+                    <td>240</td>
+                  </tr>
+                  <tr class="bottom-bd">
+                    <td class="size-tit">耐克美码 (US)</td>
+                    <td>10C</td>
+                    <td>11C</td>
+                    <td>12C</td>
+                    <td>12.5C</td>
+                    <td>13C</td>
+                    <td>1Y</td>
+                    <td>1.5Y</td>
+                    <td>2.5Y</td>
+                    <td>3Y</td>
+                    <td>4Y</td>
+                    <td>4.5Y</td>
+                    <td>5Y</td>
+                    <td>5.5Y</td>
+                  </tr>
+                  <tr class="bottom-bd">
+                    <td class="size-tit">阿迪达斯英码 (UK)</td>
+                    <td>9.5K</td>
+                    <td>10K</td>
+                    <td>11K</td>
+                    <td>11.5K</td>
+                    <td>12.5K</td>
+                    <td>13.5K</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3.5</td>
+                    <td>4</td>
+                    <td>4.5</td>
+                    <td>5</td>
+                    <td>6</td>
+                  </tr>
+                  <tr class="bottom-bd">
+                    <td class="size-tit">新百伦美码 (US)</td>
+                    <td>10.5</td>
+                    <td>11.5</td>
+                    <td>12</td>
+                    <td>13</td>
+                    <td>13.5</td>
+                    <td>1.5</td>
+                    <td>2.5</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>4.5</td>
+                    <td>5</td>
+                    <td>5.5</td>
+                    <td>6</td>
+                  </tr>
+                  <tr>
+                    <td class="size-tit">安踏欧码 (EUR)</td>
+                    <td>26</td>
+                    <td>27</td>
+                    <td>28</td>
+                    <td>29</td>
+                    <td>30</td>
+                    <td>31</td>
+                    <td>32</td>
+                    <td>33</td>
+                    <td>34</td>
+                    <td>35</td>
+                    <td>36</td>
+                    <td>37</td>
+                    <td>38</td>
+                  </tr>
+                  <tr class="ft-tit">
+                    <td colspan="12">注：脚长+1cm或者0.5cm就是小朋友最适合的内长</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="measure">
+              <p class="bold">测量脚长/内长方法</p>
+              <p>测量时必须采取正确的姿势：1. 双脚平行站立（勿坐！勿蹲）；2.体重均由双腿承受。</p>
+              <div class="measure-way">
+                <div class="measure-1 dib tac">
+                  <img src="<?php echo $this->di['sysconfig']['staticServer'];?>images/mall/measure-1.jpg" alt="方法一">
+                  <p class="mt10 mb10 tal">方法一（测量脚长）</p>
+                  <p class="fz12 tal">在确定宝宝脚平直，不弯曲，不拱起的状态下，从大拇指到脚后路中间的距离以厘米为单位。</p>
+                </div>
+                <div class="measure-2 dib tac">
+                  <img src="<?php echo $this->di['sysconfig']['staticServer'];?>images/mall/measure-2.jpg" alt="方法二">
+                  <p class="mt10 mb10 tal">方法二（测量内长）</p>
+                  <p class="fz12 tal">找一双宝宝最合脚的鞋子，取出鞋垫从A点到B点之间的距离，以厘米为单位。请仔细看图中标，后面突出的部分是不计长度的。</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="shoes-parameter-introduce fix">
+          <div class="parameter-introduce-name function">
+            <p>基本功能</p>
+          </div>
+          <div class="parameter-introduce-content function">
+            <p class="ml20 mb30 fun-list">实时定位</p>
+            <p class="ml20 mb30 fun-list">安全围栏</p>
+            <p class="ml20 mb30 fun-list">智能预警</p>
+            <p class="ml20 mb30 fun-list">多人协助监护</p>
+            <p class="ml20 fun-list">健康管理</p>
+          </div>
+        </div>
+        <div class="shoes-parameter-introduce fix">
+          <div class="parameter-introduce-name position">
+            <p>定位方法</p>
+          </div>
+          <div class="parameter-introduce-content position">
+            <p class="ml10">
+              <img src="<?php echo $this->di['sysconfig']['staticServer'];?>images/mall/shoes-position.jpg" alt="定位方法">
+            </p>
+            <p class="mt10">
+              <span class="row-1 dib">GPS</span>
+              <span class="row-2 dib">LBS</span>
+              <span class="row-3 dib">计步辅助</span>
+            </p>
+          </div>
+        </div>
+        <div class="shoes-parameter-introduce fix">
+          <div class="parameter-introduce-name">
+            <p>定位精度</p>
+          </div>
+          <div class="parameter-introduce-content">
+            <p class="ml20">空旷区域
+              <5米</p>
+          </div>
+        </div>
+        <div class="shoes-parameter-introduce fix">
+          <div class="parameter-introduce-name material">
+            <p>鞋体材质</p>
+          </div>
+          <div class="parameter-introduce-content material">
+            <p class="ml20 mb30">高透气优质网布</p>
+            <p class="ml20 mb30">耐水解PU</p>
+            <p class="ml20 mb30">PU高弹料混ARTi-LAGE材质鞋垫</p>
+            <p class="ml20">TPR耐磨大底</p>
+          </div>
+        </div>
+        <div class="shoes-parameter-introduce fix">
+          <div class="parameter-introduce-name">
+            <p>防水</p>
+          </div>
+          <div class="parameter-introduce-content">
+            <p class="ml20">生活防水</p>
+          </div>
+        </div>
+        <div class="shoes-parameter-introduce fix">
+          <div class="parameter-introduce-name">
+            <p>电池</p>
+          </div>
+          <div class="parameter-introduce-content">
+            <p class="ml20">370mAh凝胶聚合物锂离子电池</p>
+          </div>
+        </div>
+        <div class="shoes-parameter-introduce fix">
+          <div class="parameter-introduce-name bd-n">
+            <p>APP支持</p>
+          </div>
+          <div class="parameter-introduce-content bd-n">
+            <p class="ml20 mb30">Android 2.3及以上；</p>
+            <p class="ml20">iOS 6.1及以上</p>
+          </div>
+        </div>
+
+      </div>
+      <!-- 产品参数结束 -->
+    </div>
+
+  </div>
+<script type="text/javascript">
+    var udomain = "<?=$this->di['sysconfig']['ucenterPath'];?>";
+    seajs.config({
+        base : "<?=$this->di['sysconfig']['staticServer'];?>js/",
+    });
+    seajs.use("modules/front/item/index");
+</script>

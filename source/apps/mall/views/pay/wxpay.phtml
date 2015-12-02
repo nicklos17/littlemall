@@ -1,0 +1,42 @@
+ <div class="w auto">
+    <!-- 公共面包屑开始 -->
+    <div class="crumbs-nav"><a href="#">首页</a>
+      <em>></em><a href="#">微信扫码支付</a>
+    </div>
+    <!-- 公共面包屑结束 -->
+    <!-- 主体部分开始 -->
+    <div class="content ovh">
+      <!-- 正文部分开始 -->
+      <div class="main full-wrap fl dib">
+        <div class="weixin-pay">
+          <h2>微信支付 订单号:<?=$order['order_sn']?></h2>
+          <div class="wx-box fix">
+            <div class="wx-box-img" >
+              <div class="wx-scan-tips" id="qrcode">
+                <p>请使用微信扫一扫</p>
+                <p>扫描二维码支付</p>
+              </div>
+            </div>
+            <div class="wx-pay-guide">
+              <img src="<?=$this->di['sysconfig']['staticServer'];?>images/mall/wx-phone-scan.png" alt="wx-phone-scan">
+            </div>
+          </div>
+          <div class="choose-other-pay">
+            <a href="javascript:history.back(-1)" title="选择其他支付方式">< 选择其他支付方式</a>
+          </div>
+        </div>
+      </div>
+      <!-- 正文部分结束 -->
+    </div>
+    <!-- 主体部分结束 -->
+  </div>
+    <script type="text/javascript">
+    var url = "<?=$url?>";
+    seajs.config({
+        base : "<?php echo $this->di['sysconfig']['staticServer'];?>js/",
+        alias: {
+            'qrcode' : 'utils/qrcode.js'
+        }
+    });
+    seajs.use("modules/front/pay/wechat");
+  </script>

@@ -1,0 +1,164 @@
+<div>
+    <div class="page-header">
+        <h1>
+            <a href="/back">退换货管理</a>
+            <small>
+                <i class="icon-double-angle-right fa fa-angle-double-right"></i>
+                详情
+            </small>
+            </h1>
+    </div>
+    <?php if(empty($backInfo)):?>
+        没有该信息
+    <?php else: ?>
+        <p>
+            <span class="fwb">状态:</span>
+            <span class="bk-status" data="<?=$backInfo['bord_status']?>">
+                <?php
+                if($backInfo['bord_status'] == 1) echo '未审核';
+                else if($backInfo['bord_status'] == 3) echo '审核通过';
+                else if($backInfo['bord_status'] == 5) echo '审核未通过';
+                else if($backInfo['bord_status'] == 7) echo '完成';
+                else if($backInfo['bord_status'] == 9) echo '关闭';
+                else if($backInfo['bord_status'] == 11) echo '物品已接收，符合条件';
+                else if($backInfo['bord_status'] == 13) echo '物品已接收，不符合条件';
+                ?>
+                <?php if(!in_array($backInfo['bord_status'], [7, 9])):?><a href="javascript:void(0);" class="icon-pencil" id="set-status"></a><?php endif;?>
+            </span>
+            <span class="bk-set-status" style="display: none;">
+                <select id="bord-status">
+                    <!--<option value="1">未审核</option>-->
+                    <?php if($backInfo['bord_status'] == 1):?>
+                        <option value="3">审核通过</option>
+                        <option value="5">审核未通过</option>
+                    <?php endif;?>
+                    <?php if($backInfo['bord_status'] == 11):?><option value="7">完成</option><?php endif;?>
+                    <?php if($backInfo['bord_status'] != 7):?><option value="9">关闭</option><?php endif;?>
+                    <?php if($backInfo['bord_status'] == 3):?>
+                        <option value="11">物品已接收，符合条件</option>
+                        <option value="13">物品已接收，不符合条件</option>
+                    <?php endif;?>
+                </select>
+                <a href="javascript:void(0);" id="confirm-status" class="btn btn-mini">确定</a>
+                <a href="javascript:void(0);" id="cancel-status" class="btn btn-mini">取消</a>
+            </span>
+        </p>
+        <hr />
+        <p><span class="fwb">售后编号: </span><i><?=$backInfo['bord_sn'];?></i></p>
+        <p><span class="fwb">订单编号: </span><i><?=$backInfo['order_sn'];?></i></p>
+        <p><span class="fwb">申请日期: </span><i><?php echo date('Y-m-d', $backInfo['bord_addtime']);?></i></p>
+        <p><span class="fwb">申请类型:</span>
+            <span class="bk-type" data="<?=$backInfo['bord_type']?>">
+                <?php
+                if($backInfo['bord_type'] == 1) echo '退货';
+                else if($backInfo['bord_type'] == 3) echo '换货';
+                //else if($backInfo['bord_type'] == 5) echo '退款';
+                else if($backInfo['bord_type'] == 5) echo '智能模块更换';
+                ?>
+                <?php if(!in_array($backInfo['bord_status'], [5, 7, 9])):?><a href="javascript:void(0);" class="icon-pencil" id="set-type"></a><?php endif;?>
+            </span>
+            <span class="bk-set-type" style="display: none;">
+                <select id="bord-type">
+                    <option value="1">退货</option>
+                    <option value="3">换货</option>
+                    <!--<option value="5">退款</option>-->
+                    <option value="5">智能模块更换</option>
+                </select>
+                <a href="javascript:void(0);" id="confirm-type" class="btn btn-mini">确定</a>
+                <a href="javascript:void(0);" id="cancel-type" class="btn btn-mini">取消</a>
+            </span>
+        </p>
+        <p><span class="fwb">申请原因:</span>
+            <?php
+            if($backInfo['bord_reason'] == 1) echo '尺码原因';
+            else if($backInfo['bord_reason'] == 2) echo '快递原因';
+            else if($backInfo['bord_reason'] == 3) echo '鞋体原因';
+            else if($backInfo['bord_reason'] == 4) echo '智能模块原因';
+            else if($backInfo['bord_reason'] == 5) echo '发错货';
+            else if($backInfo['bord_reason'] == 6) echo '其他';
+            ?>
+        </p>
+        <hr />
+        <?php if($backInfo['bord_type'] == 5 || $backInfo['bord_type']==1):?>
+            <form id="money-form">
+            <p><span class="fwb">申请退款金额: </span>
+                <i class="bk-money back-money-show"><?=$backInfo['bord_back_money'];?></i>
+                <span class="bk-set-money" style="display: none;">
+                    <input value="<?=$backInfo['bord_back_money']?>" id="back-money" name="back-money" class="{number:true}">
+                </span>
+            </p>
+            <p><span class="fwb">实际退款金额: </span>
+                <span class="bk-money">
+                    <i><span class="act-money-show"><?=$backInfo['bord_act_money'];?></span></i>
+            <?php if(!in_array($backInfo['bord_status'], [5, 7, 9])):?><a href="javascript:void(0);" class="icon-pencil" id="edit-money"></a><?php endif;?>
+                </span>
+                <span class="bk-set-money" style="display: none;">
+                    <input value="<?=$backInfo['bord_act_money']?>" id="act-money" name="act-money" class="{number:true}">
+                    <a href="javascript:void(0);" id="confirm-money" class="btn btn-mini">确定</a>
+                    <a href="javascript:void(0);" id="cancel-money" class="btn btn-mini">取消</a>
+                </span>
+            </p>
+            </form>
+            <hr />
+        <?php endif;?>
+
+            <form id="ship-form">
+                <p><span class="fwb">快递单号:</span>
+                    <i><span class="bk-ship"><span class="ship-sn-show"><?=$backInfo['bord_shipping_sn']?></span>&nbsp;
+                            <?php if(!in_array($backInfo['bord_status'], [5, 7, 9])):?>
+                                <a href="javascript:void(0);" class="icon-pencil" id="edit-ship"></a>
+                            <?php endif;?>
+                        </span></i>
+                    <span class="bk-set-ship" style="display: none;"><input value="<?=$backInfo['bord_shipping_sn']?>" name="shipping-sn" id="shipping-sn" class="{snValid:true, maxlength:20}"></span>
+                </p>
+                <p>
+
+                <span class="fwb">快递公司:</span>
+                    <span class="bk-ship"><span class="ship-name-show"><?=$backInfo['bord_shipping_name']?></span></span>
+                    <span class="bk-set-ship" style="display: none;">
+                        <input value="<?=$backInfo['bord_shipping_name']?>" id="shipping-name" name="shipping-name" class="{maxlength:20}">
+                        <a href="javascript:void(0);" id="confirm-ship" class="btn btn-mini">确定</a>
+                        <a href="javascript:void(0);" id="cancel-ship" class="btn btn-mini">取消</a>
+                    </span>
+                </p>
+            </form>
+            <hr/>
+
+        <p><span class="fwb">收货人:</span> <?=$backInfo['bord_consignee']?></p>
+        <p><span class="fwb">收货地址:</span> <?=$province?> <?=$city?> <?=$district?> <?=$backInfo['bord_addr_info']?></p>
+        <p><span class="fwb">手机:</span> <?=$backInfo['bord_mobile']?></p>
+        <p><span class="fwb">座机:</span> <i><?=$backInfo['bord_tel']?></i></p>
+
+        <hr />
+
+        <p><span class="fwb">商品名称:</span> <?=$backInfo['goods_name']?></p>
+        <p><span class="fwb">商品货号:</span> <i><?=$backInfo['goods_sn']?></i></p>
+        <p><span class="fwb">商品属性:</span>
+            <?php foreach($attrInfo as $attr):?>
+                <span class="goods-attr"><?php echo $attr['type'];?>「 <i><?php echo $attr['name'];?></i> 」</span>&nbsp;
+            <?php endforeach;?>
+        </p>
+        <p><span class="fwb">商品图片:</span>&nbsp;&nbsp;<img class="vat img-rounded" style="max-width: 100px; max-height: 100px;" src="<?php echo $backInfo['attrs_img'];?>" alt="商品图片"/></p>
+        <hr />
+        <p><span class="fwb">用户留言:</span>
+            <?php if(empty($backInfo['bord_msg'])):?>
+                未填写
+            <?php else:?>
+                <?=$backInfo['bord_msg']?>
+            <?php endif;?>
+        </p>
+        <p><span class="fwb">用户图片:</span>
+            <?php $imgArr = explode(',', rtrim($backInfo['bord_imgs'], ','));?>
+            <?php foreach($imgArr as $img):?>
+                <?php if(!empty($img)):?><img class="vat img-rounded" style="max-width: 400px; max-height: 400px;" src="<?php echo $img?>" alt="用户图片"/><?php endif;?>
+            <?php endforeach;?>
+        </p>
+    <?php endif;?>
+    <input type="hidden" value="<?=$backInfo['bord_id']?>" id="bord-id">
+</div>
+<script>
+    seajs.config({
+        base : "<?php echo $this->di['sysconfig']['staticServer'];?>js/"
+    });
+    seajs.use(['modules/back/detail', 'spm_modules/jquery-plugin/jquery.validate', 'spm_modules/jquery-plugin/jquery.validate.metadata', 'modules/back/backValidate']);
+</script>

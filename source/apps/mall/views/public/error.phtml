@@ -1,0 +1,28 @@
+<div class="w auto">
+    <!-- 公共面包屑开始 -->
+    <div class="crumbs-nav">
+    </div>
+    <!-- 公共面包屑结束 -->
+    <!-- 主体部分开始 -->
+    <div class="content ovh">
+      <!-- 正文部分开始 -->
+      <div class="main full-wrap fl dib">
+        <div class="sell-out tac">
+          <img src="<?=$this->di['sysconfig']['staticServer']?>images/mall/sell-out.jpg" alt="售罄" class="dib sell-out-img">
+                <p class="suc-tit"><?php echo $error;?></p>
+                <p>
+                    <strong id="seconds-remain">5</strong>秒</strong>后，我们将为您跳转到<a href="<?php echo $url;?>" class="color"><?php echo $title?></a>
+                </p>
+          </p>
+        </div>
+      </div>
+      <!-- 正文部分结束 -->
+    </div>
+    <!-- 主体部分结束 -->
+  </div>
+<script>
+    seajs.use("<?php echo $this->di['sysconfig']['staticServer'];?>js/utils/jump", function(jump){
+        jump.errReturn('<?=$url;?>');
+    });
+
+</script>

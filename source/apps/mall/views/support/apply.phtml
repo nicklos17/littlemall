@@ -1,0 +1,172 @@
+<div class="w auto">
+    <!-- 公共面包屑开始 -->
+    <div class="crumbs-nav"><a href="#">首页</a>
+        <em>></em><a href="#">订单中心</a>
+        <em>></em><a href="#">售后服务</a>
+        <em>></em><a href="#">申请售后服务</a>
+    </div>
+    <!-- 公共面包屑结束 -->
+    <!-- 主体部分开始 -->
+    <div class="content ovh">
+        <!-- 侧边栏导航开始 -->
+        <?php $this->partial("common/nav") ?>
+        <!-- 侧边栏导航结束 -->
+        <!-- 正文部分开始 -->
+        <div class="main fl dib">
+            <div class="info-tit rel">
+                <h2 class="tit dib">申请售后服务</h2>
+            </div>
+
+            <div class="order-service-info">
+                <!-- 申请售后服务开始 -->
+                <form action="" method="post" id="frm-support">
+                    <div class="reg-row">
+                        <label class="tit">订单编号</label>
+                        <span class="express-id">：<?=$orderSn?></span>
+                    </div>
+                    <div class="reg-row order-content cxt-choose">
+                        <label class="tit">
+                            <em class="tips-star"></em>申请内容</label>
+                        <ul>
+                            <li><a class="order-item cxt-item
+                            <?php if(time()-$confirmTime>$this->di['sysconfig']['supportTime']['back']):?> disabled<?php endif;?>"
+                                   href="javascript:void(0);" data-id="1">退货
+                                </a>
+                            </li>
+                            <li><a class="order-item cxt-item
+                            <?php if(time()-$confirmTime>$this->di['sysconfig']['supportTime']['exchange']):?> disabled<?php endif;?>"
+                                   href="javascript:void(0);" data-id="3">换货
+                                </a>
+                            </li>
+                            <li><a class="order-item cxt-item
+                            <?php if(time()-$confirmTime>$this->di['sysconfig']['supportTime']['exchangeModel']):?> disabled<?php endif;?>"
+                                   href="javascript:void(0);" data-id="5">智能模块更换</a>
+                            </li>
+                        </ul>
+                        <input type="hidden" name="bord_type">
+                        <span class="tips tips-error dn" id="error-bord-type">该订单已超过七天退货期</span>
+                    </div>
+                    <div class="reg-row shoes-chose fix">
+                        <label class="tit">
+                            <em class="tips-star"></em>鞋子选择</label>
+                        <ul>
+                            <?php foreach($orderGoods as $goods):?>
+                                <li class="order-item shoes-item<?php if($goods['ord_goods_back']==3):?> disabled<?php endif;?>" data-id="<?=$goods['ord_goods_id']?>">
+                                    <a class="tdn" href="javascript:void(0);">
+                                        <img src="<?=$goods['attrs_img']?>" alt="尺码">
+                                        <p>
+                                            尺码:
+                                            <?php foreach($goods['attrArr'] as $attr):?>
+                                                <?php if($attr['type'] == '尺码') echo $attr['name'];?>
+                                            <?php endforeach;?>
+
+                                        </p>
+                                    </a>
+                                </li>
+                            <?php endforeach;?>
+                        </ul>
+                        <input type="hidden" name="order_goods_id">
+                        <span class="tips tips-error dn" id="error-goods">该订单已超过七天退货期</span>
+                    </div>
+                    <div class="reg-row fix">
+                        <label class="tit">
+                            <em class="tips-star"></em>申请数量</label>
+                        <input type="text" class="input input-text" value="1" name="goods_num">
+                    </div>
+                    <div class="reg-row">
+                        <label class="tit">
+                            <em class="tips-star"></em>申请原因</label>
+                        <div class="reason-select fl">
+                            <select name="bord_reason" id="">
+                                <option value="">请选择申请原因</option>
+                                <option value="1">尺码原因</option>
+                                <option value="2">快递原因</option>
+                                <option value="3">鞋体原因</option>
+                                <option value="4">智能模块原因</option>
+                                <option value="5">发错货</option>
+                                <option value="6">其他</option>
+                            </select>
+                        </div>
+                        <span class="tips tips-error dn">所在地区未选择</span>
+                    </div>
+                    <div class="reg-row textarea">
+                        <label class="tit">
+                            <em class="tips-star"></em>情况描述</label>
+                        <textarea name="bord_msg" type="text" class="input input-text input-address" placeholder="注意：最少填写6个汉字，最多300个汉字"></textarea>
+                    </div>
+                    <div class="reg-row">
+                        <label class="tit">
+                            <em class="tips-star"></em>收货地址</label>
+                        <div class="area-select fl">
+                            <select name="pro" id="provinces" data="<?=$orderInfo['order_province']?>" class="region">
+                                <option value="">请选择省份</option>
+                            </select>
+                            <select name="city" id="cities" data="<?=$orderInfo['order_city']?>" class="region">
+                                <option value="">请选择城市</option>
+                            </select>
+                            <select name="dis" id="districts" data="<?=$orderInfo['order_district']?>" class="region">
+                                <option value="">请选择区/县</option>
+                            </select>
+                        </div>
+                        <span class="tips tips-error dn">所在地区未选择</span>
+                    </div>
+                    <div class="reg-row textarea">
+                        <label class="tit"></label>
+                        <textarea name="addr_detail" type="text" class="input input-text input-address"
+                         placeholder="不需要重复填写省市区，必须大于4个字，小于120个字"><?=$orderInfo['order_addr']?></textarea>
+                    </div>
+                    <div class="reg-row">
+                        <label class="tit">
+                            <em class="tips-star"></em>收货人姓名</label>
+                        <input type="text" class="input input-text" placeholder="长度不超过15个字" name="consignee" value="<?=$orderInfo['order_consignee']?>">
+                    </div>
+                    <div class="reg-row">
+                        <label class="tit">手机号码</label>
+                        <input type="hidden" name="tel" id="tel" value="<?=$orderInfo['order_tel']?>" class="required_group">
+                        <input type="text" class="input input-text required_group" placeholder="电话号码、手机号码必须填一项" name="mobile" value="<?=$orderInfo['order_mobile']?>">
+                        <span class="tips tips-error dn">手机格式错误</span>
+                    </div>
+                    <div class="reg-row telephone">
+                        <label class="tit">电话号码</label>
+                        <input type="text" class="input input-text number" maxlength="4" placeholder="区号" name="area_code" value="<?php echo isset($orderInfo['areaCode']) ? $orderInfo['areaCode']: '';?>">
+                        <em>-</em>
+                        <input type="text" class="input input-text tel-field" placeholder="电话号码" name="tel_num" value="<?php echo isset($orderInfo['telNum']) ? $orderInfo['telNum']: '';?>">
+                        <em>-</em>
+                        <input type="text" class="input input-text tel-field" placeholder="分机" name="ext" value="<?php echo isset($orderInfo['ext']) ? $orderInfo['ext']: '';?>">
+                    </div>
+                    <div class="reg-row upload">
+                        <label class="tit">上传凭证</label>
+                        <ul class="fix">
+                            <li class="upload-change rel dn"><input type="file" class="input-upload" name="img-evi" id="img-evi"><p class="abs upload-change-text"><a href="javascript:void(0)" id="edit-img">修改</a><em>|</em><a href="javascript:void(0);" id="del-img">删除</a></p></li>
+                            <li class="upload-add" ><input type="file" class="input-upload" name="add-img-evi" id="add-img-evi"><em id="add-file-icon">+</em></li>
+                            <input type="hidden" name="pic">
+                        </ul>
+                    </div>
+                    <div class="reg-row">
+                        <label class="tit"></label>
+                        <p>您的售后服务单提交之后，我们的客服将在第一时间为您解决。</p>
+                    </div>
+                    <div class="reg-row">
+                        <label class="tit"></label>
+                        <input type="hidden" name="order_sn" value="<?=$orderSn?>">
+                        <input type="button" class="btn btn-blue bd-n" value="提交申请" id="confirm">
+                    </div>
+                </form>
+                <!-- 申请售后服务结束 -->
+            </div>
+        </div>
+        <!-- 正文部分结束 -->
+    </div>
+    <!-- 主体部分结束 -->
+</div>
+<script>
+
+    seajs.config({
+        base : "<?php echo $this->di['sysconfig']['staticServer'];?>js/",
+        alias: {
+            'region' : 'utils/region-front'
+        }
+    });
+    seajs.use(['spm_modules/jquery-plugin/jquery.validate', 'spm_modules/jquery-plugin/ajaxfileupload', 'modules/front/support/supportValidate', 'modules/front/support/submit']);
+
+</script>

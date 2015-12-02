@@ -1,0 +1,248 @@
+  <div class="w auto">
+    <!-- 公共面包屑开始 -->
+    <div class="crumbs-nav"><a href="#">首页</a>
+      <em>></em><a href="#">提交订单</a>
+    </div>
+    <!-- 公共面包屑结束 -->
+    <!-- 主体部分开始 -->
+    <div class="content ovh">
+      <!-- 正文部分开始 -->
+      <div class="main full-wrap fl dib">
+        <div class="info-tit rel">
+          <h2 class="tit dib">确认收货地址</h2>
+        </div>
+        <div class="order address fix<?php if(empty($addressList)):?> dn<?php endif;?>">
+            <?php foreach($addressList as $address):?>
+                <div class="address-list addr-order<?php if($address['u_addr_default'] == 3):?> default-address active<?php endif;?>" data-pro='<?=$address['pro_id']?>' data-id="<?=$address['u_addr_id']?>" id="address-<?=$address['u_addr_id']?>">
+                    <div class="address-header">
+                        <strong class="user-name"><?=$address['u_addr_consignee']?></strong>
+                        <?php if($address['u_addr_default'] == 3):?>
+                            <span class="fr address-default" id="default-badge">默认地址</span>
+                        <?php endif;?>
+                        <span class="fr address-set dn">
+                            <?php if($address['u_addr_default'] != 3):?>
+                                <a href="javascript:void(0);" class="set-def">设为默认地址</a>
+                                <em>|</em>
+                            <?php endif;?>
+                            <a href="javascript:void(0);" class="edit-addr">编辑</a>
+                            <em>|</em>
+                            <a href="javascript:void(0)" class="del-addr">删除</a>
+                        </span>
+                    </div>
+                    <div class="address-detail">
+                        <p class="user-tel">
+                            <strong><?php echo $address['u_addr_mobile'] ? : $address['u_addr_tel']?></strong>
+                        </p>
+                        <p>
+                            <span class="address1">
+                                <?=$address['pro_name']?> <?=$address['city_name']?> <?=$address['dis_name']?>
+                            </span>
+                        </p>
+                        <p>
+                            <span class="address2">
+                                <?=$address['street_name']?> <?=\Mall\Utils\Inputs::subtext($address['u_addr_info'], 10)?>（<?=$address['u_addr_zipcode']?>）
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            <?php endforeach;?>
+            <div class="address-list empty-address">
+                <div class="add-address">
+                    <a class="tdn" href="javascript:void(0);">
+                        <img class="vam" src="<?=$this->di['sysconfig']['staticServer']?>images/mall/btn-add.png" alt="使用新地址">
+                        <span class="vam color">使用新地址</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="address-new address-new-submit<?php if(!empty($addressList)):?> dn<?php endif;?>"
+            <p class="address-new-tit">新增收货地址</p>
+            <!-- 新增收货地址开始 -->
+            <div class="new-address-box">
+                <form action="" method="post" id="frm-addr">
+                    <div class="reg-row">
+                        <label class="tit">所在地区</label>
+                        <div class="area-select fl">
+                            <select name="pro" id="provinces" data-id="" class="region">
+                                <option value="">请选择省份</option>
+                            </select>
+                            <select name="city" id="cities" data-id="" class="region">
+                                <option value="">请选择城市</option>
+                            </select>
+                            <select name="dis" id="districts" data-id="" class="region">
+                                <option value="">请选择区/县</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="reg-row textarea">
+                        <label class="tit">街道地址</label>
+                        <textarea name="detailAddr" id="address-detail" type="text" class="input input-text input-address" placeholder="不需要重复填写省市区，必须大于4个字符，小于120个字符"></textarea>
+                    </div>
+                    <div class="reg-row">
+                        <label class="tit">邮政编码</label>
+                        <input type="text" class="input input-text" id="zipCode" name="zipCode">
+                    </div>
+                    <div class="reg-row">
+                        <label class="tit">收货人姓名</label>
+                        <input type="text" class="input input-text" placeholder="长度不超过15个字" name="consignee">
+                    </div>
+                    <div class="reg-row">
+                        <label class="tit">手机号码</label>
+                        <input type="hidden" name="tel" value id="tel" class="required_group">
+                        <input type="text" class="input input-text required_group" placeholder="电话号码、手机号码必须填一项" name="mobile">
+                        <span class="tips tips-error dn">手机格式错误</span>
+                    </div>
+                    <div class="reg-row telephone">
+                        <label class="tit">电话号码</label>
+                        <input type="text" class="input input-text tel-field" placeholder="区号" name="areaCode">
+                        <em>-</em>
+                        <input type="text" class="input input-text tel-field" placeholder="电话号码" name="telNum">
+                        <em>-</em>
+                        <input type="text" class="input input-text tel-field" placeholder="分机" name="ext">
+                    </div>
+                    <div class="reg-row">
+                        <label class="tit"></label>
+                        <div class="set-default">
+                            <input type="checkbox" name="default">设置为默认收货地址
+                        </div>
+                    </div>
+                    <div class="reg-row">
+                        <label class="tit"></label>
+                        <input type="hidden" name="addrId" value="">
+                        <input type="submit" class="btn btn-blue bd-n" value="保存" name="save">
+                        <a class="btn btn-quit color cancel<?php if(empty($addressList)):?> dn<?php endif;?>" href="javascript:void(0);">取消</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- <div class="order-content">
+          <div class="info-tit rel">
+            <h2 class="tit dib">快递信息</h2>
+          </div>
+          <div class="order-main">
+            <div class="express-list fix">
+              <span class="express">普通快递 (运费：0.00元)</span>
+              <span class="express c-grey">顺丰速运 (运费：24.00元)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="order-content">
+          <div class="info-tit rel">
+            <h2 class="tit dib">支付方式</h2>
+          </div>
+          <div class="order-main">
+            <div class="express-list fix">
+              <span class="express c-grey">在线支付</span>
+            </div>
+          </div>
+        </div> -->
+
+        <div class="order-content">
+          <div class="info-tit rel">
+            <h2 class="tit dib">确认订单信息</h2>
+          </div>
+          <div class="order rel">
+            <div class="tips-pop abs dn">
+              <div class="btn-close">×</div>
+              <div class="title fix">
+                <span>提示</span>
+              </div>
+              <p class="tac">请选择收货地址</p>
+              <p class="tac"><a class="btn dib btn-blue" href="#">确定</a></p>
+            </div>
+            <table class="my-cart-col-4" id = "goods-list">
+              <thead>
+                <tr class="table-hd">
+                  <th class="table-row-bd col-1">
+                    <div class="right-bd">商品信息</div>
+                  </th>
+                  <th class="table-row-bd col-2">
+                    <div class="right-bd">单价(元)</div>
+                  </th>
+                  <th class="table-row-bd col-3">
+                    <div class="right-bd">数量</div>
+                  </th>
+                  <th class="table-row-bd col-4">
+                    小计(元)
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="order-add fix">
+            <div class="order-add-detail fl">
+              <form action="">
+                <div class="reg-row">
+                  <label class="tit">买家留言</label>
+                  <input type="text" id="memo" class="input input-text" placeholder="选填(买家备注)">
+                </div>
+              </form>
+              <div class="rel ticket-main">
+                <input type="checkbox" id="ticket">
+                <span class="need">开具发票</span>
+                <div class="ticket" style="display:none">
+                  <div class="reg-row">
+                    <label class="tit">客户类型</label>
+                    <select id="invoice">
+                      <option value="1">公司</option>
+                      <option value="3">个人</option>
+                    </select>
+                  </div>
+                  <div class="reg-row">
+                    <label class="tit">发票抬头</label>
+                    <input type="text" class="input input-text" id= "invoice-title" placeholder="请正确填写公司名称">
+                  </div>
+                  <div class="reg-row">
+                    <label class="tit">发票内容</label>
+                    <span>鞋子</span>
+                  </div>
+<!--                   <div class="btn-row">
+                    <input type="button" value="确定" class="btn btn-blue bd-n"><a href="#" class="btn-quit tdn">取消</a>
+                  </div> -->
+                </div>
+              </div>
+            </div>
+
+            <div class="price-sum fr">
+              <div class="tar fix">
+                <div class="order-item dib">
+                  <p>商品总价：</p>
+                  <p>优惠金额：</p>
+                  <p>运费：</p>
+                  <p class="mt">实付金额：</p>
+                </div>
+                <div class="price-list dib">
+                  <p><i id="tprice"></i>元</p>
+                  <p><i id="cps-tips">0.00</i>元</p>
+                  <p><i id="shipping-pay">0.00</i>元</p>
+                  <p class="mt" ><i id = "eprice"></i>元</p>
+                </div>
+              </div>
+              <p class="btn-submit-order">
+                <a class="btn btn-normal dib" id="back-cart" href="/cart">返回购物车</a>
+                <a class="btn btn-blue dib" id= "cart-go" href="javascript:void(0);">提交订单</a>
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!-- 正文部分结束 -->
+    </div>
+    <!-- 主体部分结束 -->
+  </div>
+  <script type="text/javascript">
+    seajs.config({
+        base : "<?php echo $this->di['sysconfig']['staticServer'];?>js/",
+        alias: {
+            'region' : 'utils/region-front'
+        }
+    });
+    seajs.use(['spm_modules/jquery-plugin/jquery.validate', 'modules/front/address/addrValidate', 'modules/front/address/index']);
+    seajs.use("modules/front/confirm/index");
+
+  </script>

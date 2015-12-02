@@ -1,0 +1,36 @@
+  <link rel="stylesheet" href="<?=$this->di['sysconfig']['domain'];?>/css/mall/mall.css" target="_top">
+  <header>
+    <nav class="my-nav">
+      <div class="sub-nav">
+        <div class="w auto">
+            <a href="http://www.yunduo.com" target="_top" class="tdn">
+            <img class="vam" style="" src="<?php echo $this->di['sysconfig']['domain'];?>/images/mall/logo.png" alt="logo"><font style="color:#00b5e9;">.</font>
+          </a>
+          <div class="dib sub-nav-fr"><a class="cur" href="<?=$this->di['sysconfig']['siteUrl']?>" target="_top">首页</a><a href="/" target="_top">云朵商城</a><a href="<?=$this->sysconfig['siteUrl']?>download.html" target="_top">App下载</a>
+          <div class="tac" style="display: inline-block; *display: inline; *zoom: 1;font-size: 16px; width: 110px; cursor: pointer;"><a href="<?=$this->sysconfig['siteUrl']?>explain.html" target="_top">帮助中心</a>
+<!--             <ul class="abs tal">
+              <li><a href="<?=$this->sysconfig['siteUrl']?>explain.html">使用说明</a></li>
+              <li><a href="<?=$this->sysconfig['siteUrl']?>about/faq.html">常见问题</a></li>
+              <li><a href="<?=$this->sysconfig['siteUrl']?>customer.html">客户服务</a></li>
+              <li><a href="<?=$this->sysconfig['siteUrl']?>about/returns.html">退换货说明</a></li>
+            </ul> -->
+          </div>
+          <a href="<?=$this->di['sysconfig']['domain']?>/code" target="_top">云码通道</a>
+          <div class="dib nav-cart">
+              <a href="<?=$this->di['sysconfig']['domain']?>/cart" target="_top" style="margin-left:0;">
+            <img class="vam" src="<?=$this->di['sysconfig']['domain'];?>/images/mall/cart-white.png" alt="我的购物车"><span id = "badge" class="badge"><?=$this->session->get('n')?:0?></span>
+            </a>
+            <!-- 导航购物车列表开始 -->
+            <div class="nav-cart-list dn">
+              <div class="cart-sum">
+                <span>购物车里共有 <em id = "cart-num">0</em> 件商品</span>
+                <a href="<?=$this->di['sysconfig']['domain']?>/cart" class="btn btn-blue fr" target="_top">查看我的购物车</a>
+              </div>
+            </div>
+            <!-- 导航购物车列表结束 -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>

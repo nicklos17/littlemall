@@ -1,0 +1,44 @@
+<div class="row-fluid">
+    <div class="span12">
+      <div class="widget-box">
+          <div class="widget-header widget-header-blue widget-header-flat">
+                <h4 class="lighter">
+                手机商城首页编辑</h4>
+          </div>
+          <div id = "yunduo-error-msg">
+
+        </div>
+
+        <div id="index-main">
+            <form class="form-horizontal">
+                <textarea rows="40" style="width:60%;" id="content"><?=$indexContent?></textarea>
+                </div>
+            </form>
+        </div>
+        <a href="javascript:void(0)" class="btn btn-mini btn-success" id="form-submit"><i class="icon-pencil"></i>生成商城首页</a>
+        <a href="<?=$this->di['sysconfig']['mobileUrl']?>/ng/#/index" class="btn btn-mini" target="_blank"><i class="icon-search"></i>点击预览</a>
+        </div>
+    </div>
+</div>
+<script>
+    $('#form-submit').on('click', function(){
+        if(confirm('确认保存?')){
+            $.ajax({
+                type: "POST",
+                url: "/mallhome/mobiEdit",
+                data:{'content':$('#content').val()},
+                dataType:'json',
+                success: function(msgObj){
+                    if(msgObj.ret == 1){
+                        alert('操作成功');
+                    }
+                    else
+                        yunduoErrorShow(msgObj.msg);
+                },
+                error:function(){
+                    alert('响应超时,请重新尝试');
+                }
+            });
+        }
+    })
+</script>

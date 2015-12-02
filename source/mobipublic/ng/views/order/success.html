@@ -1,0 +1,61 @@
+   <div class="order-bg">
+      <div class="submit-ok">
+        <div class="mb-w auto">
+          <div class="submit-ok-img">
+            <img src="/img/ng/icon-submit-ok.png" alt="submit-ok">
+          </div>
+          <div class="submit-ok-text">
+            <p class="title">订单提交成功！</p>
+            <p class="desc">请在30分钟内完成支付，否则订单将会自动取消。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="submit-ok-content">
+        <div class="mb-w auto bdn">
+          <div class="row">
+            <div class="bd-tit">订单号：</div>
+            <p>{{orderInfo.order_sn}}</p>
+          </div>
+          <div class="row">
+            <div class="bd-tit">订单金额：</div>
+            <p class="price">￥{{orderInfo.order_paied}}</p>
+          </div>
+          <div class="row">
+            <div class="bd-tit">收货信息：</div>
+            <div class="contact">
+              <p>{{orderInfo.order_consignee + ' ' + (orderInfo.order_mobile?orderInfo.order_mobile:orderInfo.order_tel)}}</p>
+              <p>{{orderInfo.pro_name + orderInfo.city_name + orderInfo.dis_name + orderInfo.order_addr}}</p>
+<!--               <p>363700</p> -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pay-ways">
+        <div class="hd">
+          <div class="mb-w auto">请选择支付方式</div>
+        </div>
+        <div class="pay-list">
+          <div class="mb-w auto">
+            <div class="pay-zfb"  ng-click="choose=true">
+              <img src="/img/ng/icon-pay-zfb.png" alt="zfb"><span>支付宝</span>
+              <span class="choose" ng-if="choose"><img src="/img/ng/icon-choose-active.png" alt="icon-choose-active"></span>
+            </div>
+            <div class="pay-wx" ng-click="choose=false">
+              <img src="/img/ng/icon-pay-wx.png" alt="wx"><span>微信(仅支持在微信内访问)</span>
+              <span class="choose" ng-if="!choose"><img src="/img/ng/icon-choose-active.png" alt="icon-choose-active"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="btn-group">
+        <div class="mb-w auto">
+          <div class="pay-sum">
+            本次需支付：<span class="price">￥{{orderInfo.order_paied}}</span>
+          </div>
+          <a ng-click="pay()" class="btn-full btn-orange" href="javascript:void(0);" title="立即支付">立即支付</a>
+        </div>
+      </div>
+    </div>

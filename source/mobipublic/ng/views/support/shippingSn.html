@@ -1,0 +1,59 @@
+<div class="order-bg">
+<!--   <div class="submit-id">
+    <div class="mb-w auto">
+      <div class="submit-id-img">
+        <img class="vam" src="/img/ng/shoes-type-0.jpg" alt="shoes-type">
+      </div>
+      <div class="submit-id-text">
+        <p class="tit">您的售后申请已经成功提交，我们将第一时间联系您，并为您提供优质的售后服务。</p>
+      </div>
+    </div>
+  </div> -->
+
+  <div class="ensure-address">
+    <div class="mb-w auto">请填写快递信息</div>
+  </div>
+  <div class="input-form">
+    <div class="mb-w auto">
+      <div class="row rel">
+        <label class="input-tit">快递选择</label>
+        <select style="float:right; width:60%" class="select" ng-model="shipComp" ng-options="key as company for (key, company) in shipComps"></select>
+        <!--<div class="arrows-right"></div>-->
+      </div>
+      <div class="row">
+        <label class="input-tit">填写单号</label>
+        <input class="input" ng-model="shippingSn" type="text">
+      </div>
+      <div class="row" style="height:50px">
+        <button class="button full" type="button" ng-click="saveShippingSn()">确认快递单号</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="ensure-address">
+    <div class="mb-w auto">云朵公司的地址</div>
+  </div>
+  <div class="submit-id-content">
+    <div class="mb-w auto">
+      <div class="row">
+        <div class="bd-tit">收件人：</div>
+        <p>云朵售后部</p>
+      </div>
+      <div class="row">
+        <div class="bd-tit">收货地址：</div>
+        <div class="ovh">
+          <p>厦门市湖里区湖里大道78号万山一号办公楼3楼云朵售后部</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="bd-tit">客服电话：</div>
+        <p>400-0000-400</p>
+      </div>
+      <div class="row">
+        <div class="bd-tit">邮编：</div>
+        <p>361000</p>
+      </div>
+    </div>
+  </div>
+
+</div>

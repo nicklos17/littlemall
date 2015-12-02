@@ -1,0 +1,29 @@
+<div class="explain-col">名称  <input type="text" value="" class="input-text" name="info[filename]">  上传时间  
+			<link rel="stylesheet" type="text/css" href="calendar/jscal2.css">
+			<link rel="stylesheet" type="text/css" href="calendar/border-radius.css">
+			<link rel="stylesheet" type="text/css" href="calendar/win2k.css">
+			<script type="text/javascript" src="calendar/calendar.js"></script>
+			<script type="text/javascript" src="calendar/lang/en.js"></script>
+			
+			<input type="text" name="info[start_uploadtime]" id="start_uploadtime" value="" size="21" class="date input-text" readonly="">&nbsp;<script type="text/javascript">
+			Calendar.setup({
+			weekNumbers: true,
+		    inputField : "start_uploadtime",
+		    trigger    : "start_uploadtime",
+		    dateFormat: "%Y-%m-%d %H:%M:%S",
+		    showTime: true,
+		    minuteStep: 1,
+		    onSelect   : function() {this.hide();}
+			});
+        </script>至   <input type="text" name="info[end_uploadtime]" id="end_uploadtime" value="" size="10" class="date input-text" readonly="">&nbsp;<script type="text/javascript">
+			Calendar.setup({
+			weekNumbers: true,
+		    inputField : "end_uploadtime",
+		    trigger    : "end_uploadtime",
+		    dateFormat: "%Y-%m-%d",
+		    showTime: false,
+		    minuteStep: 1,
+		    onSelect   : function() {this.hide();}
+			});
+        </script>  附件类型  <input type="text" value="" class="input-text" name="info[fileext]">  <input type="submit" value="搜索" class="button" name="dosubmit"> 
+		</div>

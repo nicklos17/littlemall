@@ -1,0 +1,107 @@
+<div class="w auto">
+<!-- 公共面包屑开始 -->
+<div class="crumbs-nav"><a href="#">首页</a>
+    <em>></em><a href="#">订单中心</a>
+    <em>></em><a href="#">售后服务</a>
+</div>
+
+<div class="content ovh">
+
+<?php $this->partial("common/nav") ?>
+
+<div class="main fl dib">
+<div class="info-tit rel">
+    <h2 class="tit dib">售后服务</h2>
+</div>
+<div class="order">
+<table class="table table-col-6">
+    <thead>
+    <tr>
+        <th class="table-row-bd col-1 col-first">
+            <div class="right-bd">返修/退换货编号</div>
+        </th>
+        <th class="table-row-bd col-2">
+            <div class="right-bd">订单编号</div>
+        </th>
+        <th class="table-row-bd col-3">
+            <div class="right-bd">商品详情</div>
+        </th>
+        <th class="table-row-bd col-4">
+            <div class="right-bd">申请时间</div>
+        </th>
+        <th class="table-row-bd col-5">
+            <div class="right-bd">全部状态</div>
+        </th>
+        <th class="table-row-bd col-6 col-last">
+            <div>操作</div>
+        </th>
+    </tr>
+    </thead>
+    <?php foreach($supOrders as $support):?>
+        <tbody>
+        <tr class="blank-row"></tr>
+        <tr class="table-data">
+            <td class="col-1 right-bd col-first">
+                <?=$support['bord_sn']?>
+            </td>
+            <td class="col-2 right-bd tac">
+                <?=$support['order_sn']?>
+            </td>
+            <td class="col-3 right-bd tac">
+                <img class="order-item-pic dib fl" style="width: 70px;height: auto;" src="<?=$support['attrs_img']?>" alt="<?=$support['goods_name']?>">
+                <div class="order-item-desc dib">
+                    <p class="order-item-name"><?=$support['goods_name']?>,<em class="dn"><br></em> <?=$support['goods_sn']?></p>
+                    <p class="order-item-info">
+                        <?php foreach($support['attrArr'] as $attr):?>
+                            <?=$attr['type']?>:<?=$attr['name']?>&nbsp;
+                        <?php endforeach;?>
+                    </p>
+                </div>
+            </td>
+            <td class="col-4 right-bd tac">
+                <?=date('Y-m-d', $support['bord_addtime'])?>
+            </td>
+            <td class="col-5 right-bd tac">
+                <div class="trade-status">
+                    <p class="color">
+                        <?php
+                            if(in_array($support['bord_status'], [1, 3, 11])) echo '进行中';
+                            elseif($support['bord_status'] == 5) echo '审核未通过';
+                            elseif($support['bord_status'] == 7) echo '已解决';
+                            elseif(in_array($support['bord_status'], [9, 13])) echo '已关闭';
+                        ?>
+                    </p>
+                </div>
+            </td>
+            <td class="col-6 tac col-last">
+                <div class="trade-status">
+                    <p><a href="/support/progress?supportSn=<?=$support['bord_sn']?>" class="tdn color">查看> </a></p>
+                    <?php if($support['bord_status'] == 3 && empty($support['user_shipping_sn'])):?>
+                        <p><a href="/support/express?supportSn=<?=$support['bord_sn']?>" class="tdn color">提交快递单号> </a></p>
+                    <?php endif;?>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    <?php endforeach;?>
+
+</table>
+
+<div class="pages-nav fr fix">
+    <?=$page?>
+</div>
+
+</div>
+</div>
+
+</div>
+
+</div>
+<script>
+
+    seajs.config({
+        base : "<?php echo $this->di['sysconfig']['staticServer'];?>js/"
+    });
+    seajs.use(['modules/front/support/index']);
+
+</script>

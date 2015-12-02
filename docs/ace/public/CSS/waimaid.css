@@ -1,0 +1,44 @@
+.table {
+    margin-bottom: 10px;
+}
+
+form {
+    margin: 0 0 10px;
+}
+
+body {
+    color: #393939;
+    font-family: "微软雅黑";
+    font-size: 15px;
+}
+
+.form-horizontal .control-label {
+    padding-top: 5px;
+}
+
+.btn-cancel {
+    background-color: #abbac3!important;
+    border-color: #abbac3;
+}
+
+.btn-cancel:hover{
+	background-color: #abbac3!important
+}
+
+.btn-cancel.no-border:hover{
+	border-color:#abbac3
+}
+
+.btn-cancel.no-hover:hover{
+	background-color:#abbac3!important
+}
+
+.btn-cancel.active{
+	background-color:#abbac3!important;
+	border-color:#abbac3
+}
+
+.btn-cancel.no-border.active{
+	background-color:#abbac3!important;
+	border-color:#abbac3
+}

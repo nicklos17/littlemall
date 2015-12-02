@@ -1,0 +1,168 @@
+<div class="mall-row mall-row-1">
+  <!--[/include]-->
+    <div class="index-nav tac">
+      <div class="auto shoes-thumb-index fix">
+        <div class="thumb-index-1">
+          <a href="javascript:void(0);" class="thumb-1 cur"></a>
+          <p class="cur">冰雪奇缘系列</p>
+        </div>
+        <div class="thumb-index-1">
+          <a href="javascript:void(0);" class="thumb-2"></a>
+          <p>蜘蛛侠系列</p>
+        </div>
+        <div class="thumb-index-1">
+          <a href="javascript:void(0);" class="thumb-3"></a>
+          <p>美国队长系列</p>
+        </div>
+        <div class="thumb-index-1">
+          <a href="javascript:void(0);" class="thumb-4"></a>
+          <p>绿巨人系列</p>
+        </div>
+        <div class="thumb-index-1">
+          <a href="javascript:void(0);" class="thumb-5"></a>
+          <p>钢铁侠系列</p>
+        </div>
+        <div class="thumb-index-1">
+          <a href="javascript:void(0);" class="thumb-6"></a>
+          <p>银河护卫队系列</p>
+        </div>
+        <div class="thumb-index-1">
+          <a href="javascript:void(0);" class="thumb-7"></a>
+          <p>云朵经典款</p>
+        </div>
+      </div>
+    </div>
+    <div class="content">
+      <div class="w auto">
+        <div class="main">
+          <p class="tit-1">云朵智能定位童鞋</p>
+          <h1 class="tit-2">冰雪奇缘系列</h1>
+          <div class="main-info">
+            <div class="left">
+              <div class="desc">
+                <p class="price">￥<em>359</em></p>
+                <p class="name">艾莎公主款</p>
+              </div>
+              <a class="btn-buy" href="/goods/index/206">点击购买</a>
+            </div>
+            <div class="right">
+              <div class="desc">
+                <p class="price">￥<em>359</em></p>
+                <p class="name">安娜公主款</p>
+              </div>
+              <a class="btn-buy" href="/goods/index/206">点击购买</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 首屏结束 -->
+  <!-- 主体部分开始 -->
+  <div class="mall-row mall-row-2 section b-lazy" data-src="/images/mall/shoes-index-2.jpg">
+    <div class="inner">
+      <p class="tit-1">云朵智能定位童鞋</p>
+      <h1 class="tit-2">蜘蛛侠系列</h1>
+      <div class="btn-info">
+        <p class="price">￥<em>359</em></p>
+        <a href="/goods/index/206" class="btn-buy">点击购买</a>
+      </div>
+    </div>
+  </div>
+  <div class="mall-row mall-row-3 section b-lazy" data-src="/images/mall/shoes-index-3.jpg">
+    <div class="inner">
+      <p class="tit-1">云朵智能定位童鞋</p>
+      <h1 class="tit-2">美国队长系列</h1>
+      <div class="btn-info">
+        <p class="price">￥<em>359</em></p>
+        <a href="/goods/index/206" class="btn-buy">点击购买</a>
+      </div>
+    </div>
+  </div>
+  <div class="mall-row mall-row-4 section b-lazy" data-src="/images/mall/shoes-index-4.jpg">
+    <div class="inner">
+      <p class="tit-1">云朵智能定位童鞋</p>
+      <h1 class="tit-2">绿巨人系列</h1>
+      <div class="btn-info">
+        <p class="price">￥<em>359</em></p>
+        <a href="/goods/index/206" class="btn-buy">点击购买</a>
+      </div>
+    </div>
+  </div>
+  <div class="mall-row mall-row-5 section b-lazy" data-src="/images/mall/shoes-index-5.jpg">
+    <div class="inner">
+      <p class="tit-1">云朵智能定位童鞋</p>
+      <h1 class="tit-2">钢铁侠系列</h1>
+      <div class="btn-info">
+        <p class="price">￥<em>359</em></p>
+        <a href="/goods/index/206" class="btn-buy">点击购买</a>
+      </div>
+    </div>
+  </div>
+  <div class="mall-row mall-row-6 section b-lazy" data-src="/images/mall/shoes-index-6.jpg">
+    <div class="inner">
+      <p class="tit-1">云朵智能定位童鞋</p>
+      <h1 class="tit-2">银河护卫队系列</h1>
+      <div class="btn-info">
+        <p class="price">￥<em>359</em></p>
+        <a href="/goods/index/206" class="btn-buy">点击购买</a>
+      </div>
+    </div>
+  </div>
+  <div class="mall-row mall-row-7 section b-lazy" data-src="/images/mall/shoes-index-7.jpg">
+    <div class="inner">
+      <p class="tit-1">云朵智能定位童鞋</p>
+      <h1 class="tit-2">云朵经典款</h1>
+      <div class="btn-info">
+        <p class="price">￥199</p>
+        <a href="/goods/index/206" class="btn-buy">点击购买</a>
+      </div>
+    </div>
+  </div>
+  <div class="mall-row-8 section">
+    <div class="inner fix">
+      <div class="half">
+        <img class="cost b-lazy" data-src="/images/mall/shoes-index-8-1.jpg" alt="服务费">
+        <div class="service-desc">
+          <h2>云朵服务费 1年</h2>
+          <p class="desc">1次购买1整年服务，更便宜，更安心</p>
+          <p class="price">89元</p>
+        </div>
+      </div>
+      <div class="half">
+        <div class="col-1 dib">
+          <div class="tit dib"><span>云朵充电头</span>
+            <br><em>19元</em>
+          </div>
+          <img class="vab b-lazy" data-src="/images/mall/shoes-index-8-2.jpg" alt="云朵充电头">
+        </div>
+        <div class="col-2 dib">
+            <div class="sub-tit"><span>云朵充电线</span>
+              <br>20元
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!--[include "../../include/service-desc.html"]-->
+  <!-- 我是分割线 -->
+  <div class="section service-list">
+    <div class="w auto tac">
+      <img data-src="/images/mall/detail-12.jpg" alt="3M反光材质" class="dib b-lazy">
+    </div>
+  </div>
+  <!--[/include]-->
+  <!-- 主体部分结束 -->
+
+  <!-- 返回顶部结束 -->
+  <!-- 公共尾部结束 -->
+  <!--[/include]-->
+  <!-- 以下是临时测试使用 -->
+<script type="text/javascript">
+    seajs.config({
+        base : "<?=$this->di['sysconfig']['staticServer'];?>js/utils",
+    });
+    seajs.use("jquery.mousewheel.js", "home.js");
+</script>

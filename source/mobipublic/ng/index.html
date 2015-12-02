@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-cn" ng-app='shopManager'>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="keywords" content="云朵儿童安全鞋，云朵儿童，云朵安全，yunduokids,yunduo儿童安全鞋，云朵官方网站，云朵智能穿戴设备，儿童打拐，儿童安全">
+  <meta name="description" content="云朵儿童安全鞋，是一款针对儿童与家长设计的软硬件结合的产品，通过童鞋内置设备与智能手机APP连接，实现与儿童安全鞋轻松关联，准确定位儿童安全鞋穿着者的所在位置。帮助家长及时了解小孩的出行情况。通过云朵APP任务设置，鼓励用户更注重家庭情感及宝宝养成。">
+  <link rel="shortcut icon" href="/img/ng/favicon.ico">
+  <title>云朵儿童安全鞋 智能定位童鞋--云朵官网Yunduo.com</title>
+  <link rel="stylesheet" href="/css/ng/style.min.css">
+</head>
+
+<body>
+  <div id="replace-body">
+    <div class="side-nav dn" id="side-nav">
+      <ul>
+        <li><a href="http://test.m.yunduo.com"><img src="/img/ng/side-nav-home.png" alt="side-nav-home"><p>首页</p></a></li>
+        <li><a href="#/"><img src="/img/ng/side-nav-mall.png" alt="side-nav-mall"><p>云朵商城</p></a></li>
+        <!--<li><a href="#"><img src="/img/ng/side-nav-yunma.png" alt="side-nav-yunma"><p>云码通道</p></a></li>-->
+        <li><a href="http://test.m.yunduo.com/download.html"><img src="/img/ng/side-nav-appdl.png" alt="side-nav-appdl"><p>App下载</p></a></li>
+        <li><a href="tel:4000000400"><img src="/img/ng/side-nav-tel.png" alt="side-nav-tel"><p class="fz12">400-0000-400</p></a></li>
+      </ul>
+    </div>
+    <div class="wrap">
+      <!--[include "../include/m-header.html"]-->
+      <!-- 公共头部开始 -->
+      <header class="header index">
+        <nav class="nav tac rel fix">
+          <a class="nav-menu" href id="nav-menu">
+            <img src="/img/ng/nav-menu.png" alt="nav-menu">
+          </a>
+          <p class="nav-tit">云朵商城</p>
+          <div class="nav-right">
+            <a class="nav-cart" href="#/cart"><img src="/img/ng/nav-cart.png" alt="nav-cart">
+                <!--<span class="cart-badge">23</span>--->
+            </a>
+            <a class="nav-login" href="http://test.my.yunduo.com"><img src="/img/ng/nav-avatar.png" alt="nav-avatar"></a>
+          </div>
+        </nav>
+      </header>
+      <!-- 公共头部结束 -->
+      <!--[/include]-->
+    <!-- 正文主体开始 -->
+      <div ng-view ></div>
+    <!-- 正文主体结束 -->
+      <!--[include "../include/m-footer.html"]-->
+      <!-- 公共尾部开始 -->
+      <footer>
+        <address>
+          <p class="cs-tel">客服电话：<span class="tel">400-0000-400</span></p>
+          <p>Copyright©2015 版权归属 云朵网络</p>
+          <p>闽ICP备14002317号-1</p>
+        </address>
+        <div class="view-version">
+          <a href="http://test.www.yunduo.com/">首页</a>
+          <em>|</em>
+          <a href="http://test.my.yunduo.com/login">登录</a>
+          <em>|</em>
+          <a href="http://test.mall.yunduo.com/">电脑版</a>
+        </div>
+        <div class="cnzz">
+          <script type="text/javascript">
+          var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+          document.write(unescape("%3Cspan id='cnzz_stat_icon_1000458188'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1000458188' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+        </div>
+      </footer>
+      <!-- 公共尾部结束 -->
+      <div id="backtop">
+        <a class="backtop to-top"></a>
+      </div>
+      <!-- 返回顶部 -->
+      <!--[/include]-->
+    </div>
+  
+    <script type="text/javascript">
+        window.shopModuleConfig = {};
+        window.document.getElementById('nav-menu').onclick = function(){
+          var menuDn = window.document.getElementById('side-nav');
+          window.document.querySelector('.wrap').classList.toggle('move');
+          menuDn.classList.toggle('dn');
+          window.document.getElementById('replace-body').classList.toggle('ovh');
+        }
+        window.document.getElementById('backtop').onclick = function(){
+            scrollTo(0, 0);
+        }
+    </script>
+    <script src='/ng/ng/angular.min.js'></script>
+    <script src='/ng/ng/angular-route.min.js'></script>
+    <script src='/ng/app.js'></script>
+    <script src='/ng/config/config.js'></script>
+    <script src='/ng/config/routeProvider.js'></script>
+    <script src='/ng/controllers.js'></script>
+    <script src='/ng/directives.js'></script>
+    <script src='/ng/services.js'></script>
+    <script src='/ng/ng/class.js'></script>
+    <script src='/ng/controllers/base/baseController.js'></script>
+    <script src='/ng/controllers/goods/indexController.js'></script>
+    <script src='/ng/controllers/cart/cartController.js'></script>
+    <script src='/ng/controllers/confirm/confirmController.js'></script>
+    <script src='/ng/controllers/utils/addressController.js'></script>
+    <script src='/ng/controllers/order/orderSuccessController.js'></script>
+    <script src='/ng/controllers/order/orderListController.js'></script>
+    <script src='/ng/controllers/order/orderDetailController.js'></script>
+    <script src='/ng/controllers/coupons/couponsController.js'></script>
+    <script src='/ng/controllers/addr/addrController.js'></script>
+    <script src='/ng/controllers/support/supportApplyController.js'></script>
+    <script src='/ng/controllers/support/supportController.js'></script>
+    <script src='/ng/controllers/support/shippingSnController.js'></script>
+    <script src='/ng/controllers/code/codeController.js'></script>
+    <script src='/ng/directives/lazyload.js'></script>
+    <!--<script src='/ng/controllers/utils/slideController.js'></script>
+    <script src='/ng/directives/ico.js'></script>
+    <script src='/ng/directives/slide.js'></script>-->
+    <script src='/ng/services/uriServices.js'></script>
+    <script src='/ng/controllers/index/indexController.js'></script>
+    <script src='/ng/controllers/error/errorController.js'></script>
+  </div>
+</body>
+
+</html>

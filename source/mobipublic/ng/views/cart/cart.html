@@ -1,0 +1,22 @@
+    <div class="mb-w auto">
+      <div class="cart-list" ng-repeat="(idx, cart) in cartList">
+        <div class="choose-state"><a href ng-click="checkData(idx)" title="choose"><img src="/img/ng/{{!cart.checked && cart.goods_status == 1?'icon-chosed.png':'icon-chose.png'}}" alt="choose-state"></a></div>
+        <div class="cart-main" ng-class="{'disabled': cart.goods_status != 1}">
+          <div class="disabled-text" ng-if="cart.goods_status != 1">已失效</div>
+          <div class="shoes-type">
+            <img src="{{cart.goods_img}}" alt="shoes-type">
+          </div>
+          <div class="cart-info">
+            <p class="tit">{{cart.goods_name}}</p>
+            <p class="detail">颜色：{{cart.attrs_names.split(',')[0]}}      尺码：{{cart.attrs_names.split(',')[1]}} 码</p>
+            <p class="price">￥{{cart.goods_price}} × {{cart.car_good_num}} </p>
+          </div>
+          <div class="shoes-del" ng-click="delData(idx)"><img src="/img/ng/icon-del.png" alt="icon-del"></div>
+        </div>
+      </div>
+    </div>
+    <div class="cart-bar fix">
+      <span class="choose-all"><a href ng-click="chkAll()" title="choose"><img class="vam" src="/img/ng/{{totalNum == checkNum?'icon-chosed.png':'icon-chose.png'}}" alt="choose-state"></a>全选</span>
+      <span class="price-sum">总额：<em>￥{{totalPrice}} </em></span>
+      <span class="cart-num" ng-click="buy()">结算 ({{checkNum}})</span>
+    </div>

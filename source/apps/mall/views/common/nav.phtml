@@ -1,0 +1,13 @@
+      <div class="side fl dib">
+        <h2 class="tit">订单中心</h2>
+        <ul>
+      <!--    <li <?php if('coupons' == $this->dispatcher->getControllerName()) echo 'class="cur"';?>><a href="/coupons" class="tdn">优惠券</a>
+          </li>-->
+          <li <?php if('order' == $this->dispatcher->getControllerName()) echo 'class="cur"';?>><a href="/order" class="tdn">我的订单</a>
+          </li>
+          <li <?php if('address' == $this->dispatcher->getControllerName()) echo 'class="cur"';?>><a href="/address" class="tdn">收货地址</a>
+          </li>
+          <li <?php if('support' == $this->dispatcher->getControllerName()) echo 'class="cur"';?>><a href="/support" class="tdn">售后服务</a>
+          </li>
+        </ul>
+      </div>

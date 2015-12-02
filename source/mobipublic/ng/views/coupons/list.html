@@ -1,0 +1,19 @@
+    <div class="order-bg">
+      <div class="mb-w auto">
+        <div class="coupons-main">
+          <div class="coupons-list" ng-repeat="cps in couponsList" ng-class="{'used' : cps.cp_status == 2,  'outed': cps.cp_status != 2 && (cps.cp_status == 3 || cps.cp_status == 0 || cps.cp_status == -1)}">
+            <div class="price"><em>￥</em>{{cps.cr_info.amount}}</div>
+            <div class="desc-info">
+              <p class="tit">使用条件：</p>
+              <p>满￥{{cps.cr_info.minAmount > 0 ? cps.cr_info.minAmount : '无限制'}} 使用 （不含运费）</p>
+              <p class="tit">有效期限：</p>
+              <p>{{cps.cr_addtime*1000 | date: 'yyyy-MM-dd'}} 至 {{cps.cp_end_time*1000 | date: 'yyyy-MM-dd'}}</p>
+            </div>
+            <a href="javascript:void(0);" ng-click="doAct(cps.act)" class="use-it"><img src="{{cps.cp_status == 2 ? '/img/ng/text-used.png' : cps.cp_status == 3 ? '/img/ng/text-disabled.png' : cps.cp_status == 0 ? '/img/ng/text-use-out.png' : cps.cp_status == -1 ? '/img/ng/text-use-pre.png' : '/img/ng/text-use.png'}}" alt="use-it"></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="btn-more" ng-show="more">
+      <a ng-click="getMore()" class="more" href="javascript:void(0);" title="显示更多订单">显示更多优惠券</a>
+    </div>

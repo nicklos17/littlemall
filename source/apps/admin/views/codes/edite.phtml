@@ -1,0 +1,55 @@
+<div class="row-fluid">
+    <div class="span12" >
+        <div class="widget-box">
+            <div class="widget-header widget-header-blue widget-header-flat">
+                <h4 class="lighter">
+                 生成云码</h4>
+            </div>
+            <div class="widget-body">
+                <div class="widget-main">
+          <div class="row-fluid">
+            <form id="itemForm"  class="form-horizontal"  action="" method="POST" enctype="multipart/form-data">
+
+            <div class="control-group">
+                  <label class="control-label"><small class="text-error"> * </small> 数量</label>
+                  <div class="controls">
+                    <input type="text" name="num" class=""  />
+                    <span class="help-inline"></span>
+                  </div>
+            </div>
+
+            <div class="control-group">
+                 <label class="control-label"><small class="text-error" class="required" > * </small> 类型 </label>
+                    <div class="controls">
+                 <select name="type">
+                    <option class="change_op" value="1">普通</option>
+                    <option class="change_op" value="3">免费</option>
+                </select>
+                 </div>
+            </div>
+
+            <div class="control-group">
+                  <label class="control-label"><small class="text-error"> * </small> 有效期开始时间</label>
+                  <div class="controls">
+                    <input type="text"  name="starTime"   id ="start_uploadtime" class="required"  />
+                    <span class="help-inline"></span>
+                  </div>
+            </div>
+            <div class="control-group">
+                  <label class="control-label"><small class="text-error"> * </small> 有效期结束时间 </label>
+                  <div class="controls">
+                    <input type="text"  name="endTime"  id="end_uploadtime" class="required"  />
+                    <span class="help-inline"></span>
+                  </div>
+            </div>
+                <button type="submit" id="form_submit" class="btn">确认提交</button>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script >
+    seajs.use("<?php echo $this->di['sysconfig']['staticServer'];?>js/modules/codes/main");
+</script>

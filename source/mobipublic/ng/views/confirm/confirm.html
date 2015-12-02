@@ -1,0 +1,120 @@
+<!--     <header class="header bb">
+      <nav class="nav tac rel fix">
+        <a class="nav-back" href="#">
+          <img src="/img/ng/nav-back.png" alt="nav-back">
+        </a>
+        <p class="nav-tit">提交订单</p>
+        <div class="nav-right">
+          <a class="nav-cart order" href="#"><img src="/img/ng/nav-cart.png" alt="nav-cart">
+          </a>
+        </div>
+      </nav>
+    </header> -->
+    <!-- 公共头部结束 -->
+    <!--[/include]-->
+    <!-- 正文主体开始 -->
+    <div class="order-bg">
+
+      <div class="ensure-address">
+        <div class="mb-w auto">确认收货地址</div>
+      </div>
+      <div class="address-main">
+        <div class="address-list" ng-click="addressChoose(addr.u_addr_id, addr.pro_id)" ng-repeat="addr in addrList">
+          <div class="main-box">
+            <div class="hd">{{addr.u_addr_consignee}} <span class="fr">{{addr.u_addr_mobile?addr.u_addr_mobile:addr.u_addr_tel}}</span></div>
+            <div class="bd">
+              <span class="default" ng-show="addr.u_addr_default==3">[默认地址] </span>{{addr.pro_name+addr.city_name+addr.dis_name+addr.u_addr_info}}
+            </div>
+          </div>
+          <div class="choose" ng-show="addrChoose==addr.u_addr_id"><img src="/img/ng/icon-choose-active.png" alt="icon-choose-active"></div>
+        </div>
+        <div class="address-list">
+          <p ng-click="addAddr=!addAddr"><a class="btn-addnew" href="javascript:void(0)" title="添加新地址"><img class="vam" src="/img/ng/icon-add.png" alt="add"><span class="vam">添加新地址</span></a></p>
+<!--           <p class="tac dn">
+            <a class="btn-addnew tac" href="javascript:void(0)" title="使用其他地址">使用其他地址</span></a>
+          </p> -->
+        </div>
+      </div>
+
+     <div ng-show="addAddr" ng-controller="addressCtrl" ng-include src="'views/utils/address/address.html'"></div>
+
+      <div class="product-list">
+        <div class="hd-title rel">
+          <div class="title">商品清单：共 {{goodsLen}} 件商品</div>
+          <div class="arrows-down arrows-up"></div>
+        </div>
+        <div class="mb-w auto">
+          <div class="shoes-info-list" ng-repeat="item in goods">
+            <div class="shoes-thumb"><img src="{{item.goods_img}}" alt="shoes-thumb"></div>
+            <div class="shoes-desc-main">
+              <div class="hd">{{item.goods_name}}, {{item.g_attr_barcode}}</div>
+              <div class="info">颜色：{{item.col}}      尺码：{{item.size}}码</div>
+              <div class="price">￥{{item.goods_price}} ×{{item.car_good_num}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+<!--       <div class="coupon-list">
+        <div class="hd-title rel">
+          <div class="title">使用云朵优惠券<a ng-click="coupons=!coupons" class="change-state" ng-class="{'active':coupons}" href="javascript:void(0);"></a></div>
+        </div>
+        <div class="mb-w auto" ng-show="coupons">
+          <div class="list"  ng-repeat="cps in couponsList" ng-click="chooseCps(cps.cp_id)">满{{cps.cr_info.maxAmount}}减{{cps.cr_info.amount}} <span class="choose"><img src="/img/ng/icon-choose-active.png" alt="icon-choose-active"></span></div>
+        </div>
+
+        <div class="mb-w auto" ng-show="!coupons">
+          <div class="list">我有兑换码 <input class="input-promotion-code" ng-model="promotionCode" type="text" placeholder="请输入兑换码(选填)" /></div>
+          <a class="btn-full" href ng-click="promotionCodeCheck()" title="使用">使用</a>
+        </div>
+      </div> -->
+
+      <div class="ticket">
+        <div class="hd-title rel">
+          <div class="title">开具发票<a ng-click="invoice=!invoice" class="change-state" ng-class="{'active':invoice}" href="javascript:void(0);"></a></div>
+        </div>
+        <div class="mb-w auto" ng-show="invoice">
+          <div class="list rel">
+            <span>客户类型</span>
+            <select ng-model="inv_type" ng-options="k as v for (k,v) in {3:'个人', 1:'公司'}" ng-change="invType(inv_type)"></select>
+<!--             <div class="arrows-right"></div> -->
+          </div>
+          <div class="list">
+            <span>发票抬头</span>
+            <input class="input-name" ng-model="invTitle" type="text" placeholder="请填写正确的发票抬头"></input>
+          </div>
+          <div class="list">
+            <span>发票内容</span>
+            <input class="input-content" value="鞋子" readonly="readonly" type="text" placeholder="鞋子"></input>
+          </div>
+<!--           <div class="btn-group">
+            <a href="javascript:void(0);" title="确定">确定</a>
+            <a href="javascript:void(0);" title="取消">取消</a>
+          </div> -->
+        </div>
+      </div>
+      <div  style="background-color: #fff;margin-top: 20px;border-top: 1px solid #dce0e2;">
+        <div class="mb-w auto">
+          <div class="list input-form">
+              <span>客户备注</span>
+              <input class="input-name input" ng-model="memo" type="text" placeholder="选填(买家备注)"></input>
+          </div>
+        </div>
+      </div>
+      <div class="price-summary">
+        <div class="mb-w auto fix">
+          <div class="fr">
+            <p><span class="fl">商品总价：</span><span>￥{{totalFee}}</span></p>
+            <p><span class="fl">优惠金额：</span><span>￥{{cpsPay}}</span></p>
+            <p><span class="fl">运费：</span><span>￥{{shipPay}}</span></p>
+            <p><span class="fl">实付金额：</span><span><em>￥{{payFee}}</em></span></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="btn-group">
+        <div class="mb-w auto">
+          <a class="btn-full" ng-click="goOrder()" href="javascript:void(0);" title="提交订单">提交订单</a>
+        </div>
+      </div>
+    </div>

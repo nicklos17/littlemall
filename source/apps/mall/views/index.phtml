@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="keywords" content="云朵儿童安全鞋，云朵儿童，云朵安全，yunduokids,yunduo儿童安全鞋，云朵官方网站，云朵智能穿戴设备，儿童打拐，儿童安全">
+  <meta name="description" content="云朵儿童安全鞋，是一款针对儿童与家长设计的软硬件结合的产品，通过童鞋内置设备与智能手机APP连接，实现与儿童安全鞋轻松关联，准确定位儿童安全鞋穿着者的所在位置。帮助家长及时了解小孩的出行情况。通过云朵APP任务设置，鼓励用户更注重家庭情感及宝宝养成。">
+  <title><?php echo isset($head_title) ? $head_title : '';?>云朵儿童安全鞋 智能定位童鞋---云朵官网Yunduo.com</title>
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="<?=$this->di['sysconfig']['staticServer'];?>css/mall/mall.css">
+  <script src="<?=$this->di['sysconfig']['staticServer'];?>js/spm_modules/jquery/1.11.1/jquery-1.11.1.min.js"></script>
+  <script src="<?=$this->di['sysconfig']['staticServer'];?>js/spm_modules/seajs/2.3.0/dist/sea.js"></script>
+  <!--[if lt IE 9]>
+    <script src="<?=$this->di['sysconfig']['staticServer'];?>js/spm_modules/ie/html5.js"></script>
+    <script src="<?=$this->di['sysconfig']['staticServer'];?>js/spm_modules/ie/respond.js"></script>
+  <![endif]-->
+  <!--[if lt IE 8]>
+    <p class="tac"><strong style="color:#ff8000">为了您的财产安全及获得更好的功能体验，强烈建议您升级您的浏览器到最新版。强烈建议使用现代浏览器（IE9+,谷歌，火狐等），推荐<a href="http://www.google.cn/chrome/" targer="_blank">谷歌浏览器</a></strong></p>
+  <![endif]-->
+</head>
+<body>
+  <!-- 公共头部开始 -->
+  <header>
+    <nav class="my-nav section <?php if(isset($homeFlag)) echo 'nobg';?>">
+    <div class="top-nav">
+        <?php
+            if(empty($this->session->get('uid'))){
+        ?>
+        <div class="w auto tar">
+            <a id="login" href="<?php echo $this->di['casLoginUrl'];?>" target="_top">登录</a>
+            <em>|</em>
+            <a href="<?php echo $this->di['sysconfig']['ucenterPath'];?>/register" target="_top">注册</a>
+        </div>
+        <?php }else { ?>
+        <div class="w auto tar">
+            欢迎您，
+            <span id="top-nick"><?php echo (empty($this->session->get('uinfo')['name']) && $this->session->get('uinfo')['name'] != '0') ? substr_replace($this->session->get('uinfo')['mobile'], '****', 4, -3) : $this->session->get('uinfo')['name'];?></span><a href="/index/logout" target="_top">[退出]</a>
+            <em>|</em>
+            <a href="<?php echo $this->di['sysconfig']['mallUrl'];?>order" target="_top">我的订单</a>
+            <em>|</em><a href="<?php echo $this->di['sysconfig']['ucenterPath'];?>/user/index" target="_top">我的云朵账户</a>
+        </div>
+        <?php } ?>
+      </div>
+
+      <div class="sub-nav">
+        <div class="w auto">
+          <a href="http://www.yunduo.com">
+            <img class="vam" src="<?php echo $this->di['sysconfig']['staticServer'];?>images/mall/<?php if(isset($homeFlag)) echo 'logo-blue.png'; else echo 'logo.png';?>" alt="logo">
+          </a>
+          <div class="dib sub-nav-fr"><a href="<?=$this->di['sysconfig']['siteUrl']?>">首页</a><a  class="cur" href="/">云朵商城</a><a href="<?=$this->sysconfig['siteUrl']?>download.html">App下载</a>
+          <div class="nav-help tac">帮助中心
+            <ul class="abs tal">
+              <li><a href="<?=$this->sysconfig['siteUrl']?>explain.html">使用说明</a></li>
+              <li><a href="<?=$this->sysconfig['siteUrl']?>about/faq.html">常见问题</a></li>
+              <li><a href="<?=$this->sysconfig['siteUrl']?>customer.html">客户服务</a></li>
+              <li><a href="<?=$this->sysconfig['siteUrl']?>about/returns.html">退换货说明</a></li>
+            </ul>
+          </div>
+          <a href="/code">云码通道</a>
+          <div class="dib nav-cart" id ="cart">
+            <a style="margin-left:0" href="/cart">
+            <img class="vam" src="<?=$this->di['sysconfig']['staticServer'];?>images/mall/<?php if(isset($homeFlag)) echo 'cart-black.png'; else echo 'cart-white.png';?>" alt="我的购物车"><span id = "badge" class="badge"><?=$this->session->get('n')?:0?></span>
+            </a>
+            <!-- 导航购物车列表开始 -->
+            <div class="nav-cart-list dn" id = "nav-cart-list" style="margin-top:1px">
+
+              <div class="cart-sum">
+                <span>购物车里共有 <em id = "cart-num">0</em> 件商品</span>
+                <a href="/cart" class="btn btn-blue fr">查看我的购物车</a>
+              </div>
+            </div>
+            <!-- 导航购物车列表结束 -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <!-- 公共头部结束 -->
+    <?=$this->getContent();?>
+  <!-- 公共尾部开始，请修正链接 -->
+  <div style="height: 284px;">
+<footer class="ft">
+    <div class="auto w footer">
+      <div class="col dib col-first">
+        <p class="fz18">关注我们</p>
+        <a href="<?=$this->di['sysconfig']['siteUrl']?>about/company.html" target="_blank">公司简介</a>
+        <a href="http://weibo.com/eYunduo" target="_blank">新浪微博</a>
+        <a href="javascript:void(0);" id="weixin" class="rel">官方微信<span id="wx-drop" class="wx-drop abs dn"><img src="<?=$this->di['sysconfig']['siteUrl']?>images/code-wx.jpg?v=2014114033"></span></a>
+        <a href="<?=$this->di['sysconfig']['siteUrl']?>about/links.html" target="_blank">友情链接</a>
+      </div>
+      <div class="col dib">
+        <p class="fz18">帮助中心</p>
+        <a href="<?=$this->di['sysconfig']['siteUrl']?>about/faq.html" target="_blank">常见问题</a>
+        <a href="<?=$this->di['sysconfig']['siteUrl']?>about/customer.html" target="_blank">客户服务</a>
+        <a href="<?=$this->di['sysconfig']['siteUrl']?>about/returns.html" target="_blank">退换货说明</a>
+      </div>
+      <div class="col dib">
+        <p class="fz18">云朵资讯</p>
+        <a href="<?=$this->di['sysconfig']['siteUrl']?>news.html" target="_blank">媒体报道</a>
+        <a href="<?=$this->di['sysconfig']['siteUrl']?>about/cooperate.html" target="_blank">媒体合作</a>
+      </div>
+      <div class="col dib col-last">
+        <strong>400-0000-400</strong>
+        <p>周一到周五 9：00-18：00</p>
+        <img style="cursor: pointer" onclick="javascript:window.open('http://b.qq.com/webc.htm?new=0&sid=4009189400&eid=218808P8z8p8p808R8R8y&o=yunduo.com&q=7&ref='+document.location, '_blank', 'height=544, width=644,toolbar=no,scrollbars=no,menubar=no,status=no');" border="0" src="<?=$this->di['sysconfig']['siteUrl']?>images/consult-online.png?v=2014114033" title="在线咨询">
+      </div>
+    </div>
+    <address class="w auto">Copyright©2015 版权归属 云朵网络有限公司
+         <span class="cnzz">
+        <script type="text/javascript">
+        var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+        document.write(unescape("%3Cspan id='cnzz_stat_icon_1000458188'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1000458188' type='text/javascript'%3E%3C/script%3E"));
+        </script>
+      </span>
+      <p>闽ICP备14002317号-1</p>
+    </address>
+  </footer>
+<script>
+        document.getElementById('weixin').onclick = function(event){
+            document.getElementById('wx-drop').className = 'wx-drop abs';
+            event.stopPropagation();
+        };
+        document.onclick = function(){
+            document.getElementById('wx-drop').className = 'wx-drop abs dn';
+        }
+</script>
+
+  </div>
+  <!-- 返回顶部开始 -->
+  <div id="backtop">
+    <a href="javascript:void(0)" class="backtop"></a>
+  </div>
+  <!-- 返回顶部结束 -->
+  <!-- 公共尾部结束 -->
+
+<script src="<?php echo $this->di['sysconfig']['staticServer'];?>js/utils/blazy.min.js"></script>
+<script src="<?php echo $this->di['sysconfig']['staticServer'];?>js/utils/function.js"></script>
+</body>
+</html>
+
+

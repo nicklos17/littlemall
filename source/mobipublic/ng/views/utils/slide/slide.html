@@ -1,0 +1,6 @@
+<ul>
+    <li data-ng-repeat="(index,img) in options.list" ng-show="options.list[index].active">
+        <img data-ng-click="imgClick(this)" data-ng-src="{{img.src}}" style="width:100px;heigth:auto"/>
+    </li>
+</ul>
+

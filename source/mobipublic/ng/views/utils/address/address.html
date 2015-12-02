@@ -1,0 +1,38 @@
+      <div class="input-form">
+        <div class="mb-w auto">
+          <div class="row">
+            <label class="input-tit">收货人</label>
+            <input class="input" ng-model="addr.consignee" type="text" placeholder="长度不超过25个字符">
+          </div>
+          <div class="row">
+            <label class="input-tit">手机号码</label>
+            <input class="input"  ng-model="addr.mobile" type="text" placeholder="电话号码，手机号码必须选填一项">
+          </div>
+          <div class="row">
+            <label class="input-tit">电话号码</label>
+            <input style="width:10%;" class="input" ng-model="addr.areaCode" type="text" placeholder="区号"><em>-</em>
+            <input style="width:30%" class="input" ng-model="addr.telNum" type="text" placeholder="电话号码"> <em>-</em>
+              <input style="width:30%" class="input" type="text" ng-model="addr.ext" type="text" placeholder="分机">
+          </div>
+          <div class="row rel">
+            <label class="input-tit">选择地区</label>
+<!--             <span class="area-placeholder">地区信息</span> -->
+            <select class="select" style="width:25%" ng-model="addr.proId" ng-options="pro.pro_id as pro.pro_name for pro in provinces" ng-change="choosePro(addr.proId)">
+            </select>
+            <select class="select"  style="width:25%" ng-model="addr.cityId"  ng-options="city.city_id as city.city_name for city in citits" ng-change="chooseCity(addr.cityId)">
+            </select>
+            <select class="select" style="width:25%" ng-model="addr.disId" ng-options="dis.dis_id as dis.dis_name for dis in districts">
+            </select>
+<!--             <div class="arrows-right"></div> -->
+          </div>
+          <div class="row address">
+            <label class="input-tit">详细地址</label>
+            <textarea class="input" type="text" ng-model="addr.detailAddr" placeholder="不需要重复填写省市区，必须大于5个字符，小于120个字符"></textarea>
+          </div>
+          <div class="row">
+            <label class="input-tit">邮政编码</label>
+            <input class="input" ng-model="addr.zipCode" type="text" placeholder="邮政编码">
+          </div>
+          <button class="button full" type="button" ng-click="saveAddr()">确认收货地址</button>
+        </div>
+      </div>

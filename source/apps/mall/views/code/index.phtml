@@ -1,0 +1,49 @@
+  <div class="w auto">
+    <!-- 公共面包屑开始 -->
+    <div class="crumbs-nav"><a href="#">首页</a>
+      <em>></em><a href="#">云码通道</a>
+    </div>
+  <div class="content">
+      <!-- 正文部分开始 -->
+      <div class="main full-wrap main-yunma">
+        <div class="yunma-channel auto">
+          <h2 class="ym-tit">云朵儿童安全鞋 为爱而生</h2>
+          <form action="" method="post">
+            <div class="reg-row">
+              <label class="tit"></label>
+              <input type="text" class="input input-text" id="yunma" value="">
+              <span class="tips-error dn" id="tips-error-code" style="padding:5px 25px">云码格式错误</span>
+            </div>
+            <div class="reg-row dn" id="bk-captcha">
+              <label class="tit"></label>
+              <input type="text" class="input input-text input-ver-code" placeholder="请输入验证码" id="captcha">
+              <img class="ver-code-img" src="/captcha/getCode" alt="图片验证码" onclick="this.src='/captcha/getCode?tm='+Math.random();">
+              <span class="tips tips-ver-code"><a class="tdn" href="javascript:void(0)" id="changeCode">换一张</a></span>
+              <span class="tips-error dn" id="tips-error-captcha">验证码错误</span>
+            </div>
+            <div class="reg-row">
+              <label class="tit"></label>
+              <input type="button" class="btn btn-blue bd-n" value="使用云码" id="confirm"><!-- 删除.btn-grey或添加.btn-blue则为蓝色按钮 -->
+            </div>
+          </form>
+          <div class="yunma-desc">
+              <h2>云码可以做什么？</h2>
+              <p>随时可以在云朵官网购买云朵儿童安全鞋的指定款式，无需等待官方的预约、抢购活动。</p>
+          </div>
+        </div>
+      </div>
+      <!-- 正文部分结束 -->
+    </div>
+    <!-- 主体部分结束 -->
+  </div>
+<script>
+
+    seajs.config({
+        base : "<?php echo $this->di['sysconfig']['staticServer'];?>js/",
+        alias: {
+            'region' : 'utils/region-front'
+        }
+    });
+    seajs.use(['spm_modules/jquery-plugin/jquery.validate', 'modules/front/code/index']);
+
+</script>

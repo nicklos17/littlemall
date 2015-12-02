@@ -1,0 +1,56 @@
+table.wmd_tm_table,table.tecspec                             {border-collapse:collapse;width:100%;}
+table.wmd_tm_table tr:nth-child(odd)                         {background-color:#f1f1f1;}
+table.wmd_tm_table tr:nth-child(even)                        {background-color:#ffffff;}
+table.wmd_tm_table tr:nth-last-child(1)                      {background-color:#888888;}
+table.wmd_tm_table tr.fixzebra                               {background-color:#f1f1f1;}
+table.wmd_tm_table td.example_code                           {vertical-align:bottom;}
+table.wmd_tm_table th a:link,table.wmd_tm_table th a:visited {color:#ffffff;}
+table.wmd_tm_table th a:hover,table.wmd_tm_table th a:active {color:#EE872A;}
+table.wmd_tm_table th{
+  color:#ffffff;
+  background-color:#555555;
+  border:1px solid #555555;
+  padding:3px;
+  vertical-align:middle;
+  text-align:center;
+}
+table.wmd_tm_table td{
+  border:1px solid #d4d4d4;
+  padding:5px;
+  padding-top:7px;
+  padding-bottom:7px;
+  vertical-align:middle;
+  text-align:center;
+}
+#wmd_tm_ok,#wmd_tm_cancel{
+  float:right;
+}
+#wmd_user_times{
+  max-width: 800px;
+}
+.wmd_timeboard{
+  margin-left:0px;
+  margin-right:33px;
+  margin-top:33px;
+  margin-bottom:33px;
+  border:1px solid #AAB2BD;
+  color: #585858;
+  background-color: #E6E9ED;
+  max-width: 800px;
+}
+#wmd_tm_custom{
+  float:left;
+}
+.wmd_clearbox{
+  clear:both;
+}
+.wmd_tid_txt{
+  margin: 10px;
+}
+.wmd_board_week{
+  margin: 10px;
+}
+.wmd_board_pad{
+  margin-top: 5px;
+  margin-bottom: 5px;
+}

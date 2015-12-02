@@ -1,0 +1,156 @@
+<div>
+    <div class="page-header">
+        <h1>
+            <a href="/back">退换货管理</a>
+            <small>
+                <i class="icon-double-angle-right fa fa-angle-double-right"></i>
+                添加
+            </small>
+        </h1>
+    </div>
+    <form role="form" class="form-horizontal" id="frm-back">
+        <div class="control-group">
+            <label class="control-label">
+                <small class="text-error"> * </small>
+                订单号:
+            </label>
+            <div class="controls">
+                <input type="text" name="order_sn" value="">
+                <input type="hidden" name="order_uid" value="">
+                <span class="help-inline"></span>
+                <button id="sync" name="sync_order" class="btn btn-success btn-mini dn" type="button">
+                    <i class="icon-refresh"></i>
+                </button>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">
+                <small class="text-error"> * </small>
+                售后类型:
+            </label>
+            <div class="controls">
+                <select name="bord_type">
+                    <option value="">选择售后类型</option>
+                    <option value="1">退货</option>
+                    <option value="3">换货</option>
+                    <option value="5">智能模块更换</option>
+                </select>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">
+                <small class="text-error"> * </small>
+                申请原因:
+            </label>
+            <div class="controls">
+                <select name="bord_reason">
+                    <option value="">选择申请原因</option>
+                    <option value="1">尺码原因</option>
+                    <option value="2">快递原因</option>
+                    <option value="3">鞋体原因</option>
+                    <option value="4">智能模块原因</option>
+                    <option value="5">发错货</option>
+                    <option value="6">其他</option>
+                </select>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">
+                <small class="text-error"> * </small>
+                商品货号:
+            </label>
+            <div class="controls">
+                <select name="order_goods_id">
+                    <option value="">选择商品</option>
+                </select>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">
+                <small class="text-error"> * </small>
+                售后商品数量:
+            </label>
+            <div class="controls">
+                <input type="text" name="goods_num" value="1">
+                <span class="help-inline"></span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">
+                快递公司:
+            </label>
+            <div class="controls">
+                <input type="text" name="ship_comp" value="">
+                <span class="help-inline"></span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">
+                快递单号:
+            </label>
+            <div class="controls">
+                <input type="text" name="ship_sn" value="">
+                <span class="help-inline"></span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">
+                <small class="text-error"> * </small>
+                收货人姓名:
+            </label>
+            <div class="controls">
+                <input type="text" name="consignee" value="">
+                <span class="help-inline"></span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">
+                <small class="text-error"> * </small>
+                收货人手机:
+            </label>
+            <div class="controls">
+                <input type="text" name="mobile" value="">
+                <span class="help-inline"></span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">
+                <small class="text-error"> * </small>
+                收货地址:
+            </label>
+            <div class="controls">
+                <select id="provinces" class="region" name="pro">
+                    <option>选择省</option>
+                </select>
+                <select id="cities" class="region" name="city">
+                    <option>选择市</option>
+                </select>
+                <select id="districts" class="region" name="dis">
+                    <option>选择县/区</option>
+                </select>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">
+                <small class="text-error"> * </small>
+                详细地址:
+            </label>
+            <div class="controls">
+                <input type="text" name="addr_detail" value="">
+                <span class="help-inline"></span>
+            </div>
+        </div>
+        <button class="btn" id="back-submit" type="button">提交</button>
+    </form>
+</div>
+<script>
+
+    seajs.config({
+        base : "<?php echo $this->di['sysconfig']['staticServer'];?>js/",
+        alias: {
+            'region' : 'utils/region-front'
+        }
+    });
+    seajs.use(['spm_modules/jquery-plugin/jquery.validate', 'modules/back/addValidate', 'modules/back/add']);
+
+</script>

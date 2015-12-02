@@ -1,0 +1,159 @@
+  <div class="w auto">
+    <!-- 公共面包屑开始 -->
+    <div class="crumbs-nav"><a href="#">首页</a>
+      <em>></em><a href="#">提交订单</a>
+    </div>
+    <!-- 公共面包屑结束 -->
+    <!-- 主体部分开始 -->
+    <div class="content ovh">
+      <!-- 正文部分开始 -->
+      <div class="main full-wrap fl dib">
+        <div class="order-success rel">
+          <div class="pop abs tac dn" id="pop"><!-- 触发 id="overlayout" -->
+            <p class="tal">支付
+              <span class="fr" id="close-pop">x</span>
+            </p>
+            <p>请您在新打开的网上银行页面进行支付，</p>
+            <p>支付完成前请不要关闭该窗口。</p>
+            <p class="pop-btn">
+              <a href="#" class="dib btn btn-blue bd-none">已完成支付</a>
+              <a href="#" class="dib btn btn-normal bd-none">支付遇到问题</a>
+            </p>
+            <p class="tar"><a href="#">返回重新选择支付方式</a>
+            </p>
+          </div>
+          <div class="success-tips">
+            <img src="<?=$this->di['sysconfig']['staticServer']?>images/mall/success-tips.png" alt="预约成功">
+          </div>
+          <div class="success-text">
+            <h2>您的订单已提交成功！付款咯~</h2>
+            <p>金额：
+              <span class="color order-amount"><?=$order['order_paied']?>元</span>
+            </p>
+            <p>订单编号：<?=$order['order_sn']?></p>
+            <p>配送：<?php  $tel = $order['order_mobile']?:$order['order_tel']; echo $order['order_consignee'] . ' / ' . $tel . ' / ' . $order['pro_name']
+             . '  ' . $order['city_name'] . '  ' . $order['dis_name']  . '  ' . $order['order_addr']?></p>
+          </div>
+        </div>
+        <div class="pay-ways">
+         <div class="pay-tit rel">
+            <h2 class="tit dib">选择支付方式</h2>
+          </div>
+          <div class="pay-box">
+            <div class="pay-ways-change">
+<!--               <span data-id="cxk" class="cxk cur">储蓄卡</span><em>|</em>
+              <span data-id="xyk" class="xyk">信用卡</span><em>|</em> -->
+              <span data-id="zfb" class="zfb cur">支付宝</span><em>|</em>
+              <span data-id="wxzf" class="wxzf">微信支付</span><em>|</em>
+            </div>
+            <div class="pay-list pay-bank-list">
+<!--               <div class="ebank-list-cxk" id="cxk-ls">
+                <section><input type="radio" name="pay-way" class="bank-chose">
+                <span class="pay-cmb dib"></span></section>
+                <section><input type="radio" name="pay-way" class="bank-chose">
+                <span class="pay-icbc dib"></span></section>
+                <section><input type="radio" name="pay-way" class="bank-chose">
+                <span class="pay-ccb dib"></span></section>
+                <section><input type="radio" name="pay-way" class="bank-chose">
+                <span class="pay-abc dib"></span></section>
+                <section><input type="radio" name="pay-way" class="bank-chose">
+                <span class="pay-boc dib mr0"></span></section>
+                <section><input type="radio" name="pay-way" class="bank-chose">
+                <span class="pay-bcm dib"></span></section>
+                <section><input type="radio" name="pay-way" class="bank-chose">
+                <span class="pay-psbc dib"></span></section>
+                <section><input type="radio" name="pay-way" class="bank-chose">
+                <span class="pay-cgb dib"></span></section>
+                <section><input type="radio" name="pay-way" class="bank-chose">
+                <span class="pay-spd dib"></span></section>
+                <section><input type="radio" name="pay-way" class="bank-chose">
+                <span class="pay-ceb dib mr0"></span></section>
+                <section><input type="radio" name="pay-way" class="bank-chose">
+                <span class="pay-pab dib"></span></section>
+                <section><input type="radio" name="pay-way" class="bank-chose">
+                <span class="pay-cib dib"></span></section>
+                <section><input type="radio" name="pay-way" class="bank-chose">
+                <span class="pay-cmbc dib"></span></section>
+                <section><input type="radio" name="pay-way" class="bank-chose">
+                <span class="pay-citic dib"></span></section>
+                <section><input type="radio" name="pay-way" class="bank-chose">
+                <span class="pay-sdb dib mr0"></span></section>
+                <section><input type="radio" name="pay-way" class="bank-chose">
+                <span class="pay-shb dib"></span></section>
+                <section><input type="radio" name="pay-way" class="bank-chose">
+                <span class="pay-bjrcb dib"></span></section>
+                <section><input type="radio" name="pay-way" class="bank-chose">
+                <span class="pay-nbb dib"></span></section>
+                <section><input type="radio" name="pay-way" class="bank-chose">
+                <span class="pay-hzb dib"></span></section>
+                <section><input type="radio" name="pay-way" class="bank-chose">
+                <span class="pay-srcb dib mr0"></span></section>
+              </div>
+              我是分割线
+              <div class="ebank-list-xyk dn" id="xyk-ls">
+                <section><input type="radio" name="pay-way" class="bank-chose">
+                <span class="pay-cmb dib"></span></section>
+                <section><input type="radio" name="pay-way" class="bank-chose">
+                <span class="pay-icbc dib"></span></section>
+                <section><input type="radio" name="pay-way" class="bank-chose">
+                <span class="pay-ccb dib"></span></section>
+                <section><input type="radio" name="pay-way" class="bank-chose">
+                <span class="pay-abc dib"></span></section>
+                <section><input type="radio" name="pay-way" class="bank-chose">
+                <span class="pay-boc dib mr0"></span></section>
+                <section><input type="radio" name="pay-way" class="bank-chose">
+                <span class="pay-bcm dib"></span></section>
+                <section><input type="radio" name="pay-way" class="bank-chose">
+                <span class="pay-psbc dib"></span></section>
+                <section><input type="radio" name="pay-way" class="bank-chose">
+                <span class="pay-cgb dib"></span></section>
+                <section><input type="radio" name="pay-way" class="bank-chose">
+                <span class="pay-spd dib"></span></section>
+                <section><input type="radio" name="pay-way" class="bank-chose">
+                <span class="pay-ceb dib mr0"></span></section>
+                <section><input type="radio" name="pay-way" class="bank-chose">
+                <span class="pay-pab dib"></span></section>
+                <section><input type="radio" name="pay-way" class="bank-chose">
+                <span class="pay-cib dib"></span></section>
+                <section><input type="radio" name="pay-way" class="bank-chose">
+                <span class="pay-cmbc dib"></span></section>
+                <section><input type="radio" name="pay-way" class="bank-chose">
+                <span class="pay-citic dib"></span></section>
+                <section><input type="radio" name="pay-way" class="bank-chose">
+                <span class="pay-sdb dib mr0"></span></section>
+                <section><input type="radio" name="pay-way" class="bank-chose">
+                <span class="pay-shb dib"></span></section>
+                <section><input type="radio" name="pay-way" class="bank-chose">
+                <span class="pay-bjrcb dib"></span></section>
+                <section><input type="radio" name="pay-way" class="bank-chose">
+                <span class="pay-nbb dib"></span></section>
+                <section><input type="radio" name="pay-way" class="bank-chose">
+                <span class="pay-hzb dib"></span></section>
+                <section><input type="radio" name="pay-way" class="bank-chose">
+                <span class="pay-srcb dib mr0"></span></section>
+              </div> -->
+              <!-- 我是分割线 -->
+              <div class="zfb" id="zfb-ls">
+  <!--              <input type="radio" name="pay-way" class="bank-chose" data-way="zfb-scan">
+                <span class="pay-zfb-sc dib"></span>-->
+                <input type="radio" name="pay-way" id="zfb-type" class="bank-chose" data-way="zfb">
+                <label for="zfb-type" class="pay-zfb dib"></label>
+              </div>
+              <!-- 我是分割线 -->
+              <div class="wxzf dn" id="wxzf-ls">
+                <input type="radio" id="wx-type" name="pay-way" class="bank-chose" data-way="wx">
+                <label for="wx-type" class="pay-wx dib"></label>
+              </div>
+            </div>
+          </div>
+
+          <div class="pay-btn tar fix">
+<!--             <input type="button" value="修改订单" class="btn btn-normal bd-n"> -->
+            <input type="button" value="下一步" class="btn btn-normal btn-blue bd-n" id="pay-next">
+          </div>
+        </div>
+      </div>
+      <!-- 正文部分结束 -->
+    </div>
+    <!-- 主体部分结束 -->
+  </div>

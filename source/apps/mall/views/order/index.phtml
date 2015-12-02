@@ -1,0 +1,244 @@
+  <div class="w auto">
+    <!-- 公共面包屑开始 -->
+    <div class="crumbs-nav"><a href="#">首页</a>
+      <em>></em><a href="#">订单中心</a>
+      <em>></em><a href="#">我的订单</a>
+    </div>
+    <!-- 公共面包屑结束 -->
+    <!-- 主体部分开始 -->
+    <div class="content ovh">
+      <!-- 侧边栏导航开始 -->
+    <?php $this->partial("common/nav") ?>
+
+      <!-- 侧边栏导航结束 -->
+      <!-- 正文部分开始 -->
+      <div class="main fl dib">
+        <div class="info-tit rel">
+          <h2 class="tit dib">我的订单</h2>
+          <div class="order-type dib abs"><a <?php if($act == 'all' or $act == '' ) echo 'class="cur"';?> href="/order?act=all">全部订单</a>
+            <em>|</em><a <?php if($act == 'pendingPayment') echo 'class="cur"';?> href="/order?act=pendingPayment">待付款订单</a>
+            <em>|</em><a <?php if($act == 'afterReceipt') echo 'class="cur"';?> href="/order?act=afterReceipt">待收货订单</a>
+          </div>
+        </div>
+        <div class="order">
+          <table class="table table-col-5">
+            <thead>
+              <tr>
+                <th class="table-row-bd col-1 col-first">
+                  <div class="right-bd">商品信息</div>
+                </th>
+                <th class="table-row-bd col-2">
+                  <div class="right-bd">单价(元)</div>
+                </th>
+                <th class="table-row-bd col-3">
+                  <div class="right-bd">数量</div>
+                </th>
+                <th class="table-row-bd col-4">
+                  <div class="right-bd">实付(元)</div>
+                </th>
+                <th class="table-row-bd col-5 col-last">
+                  <div>交易状态</div>
+                </th>
+              </tr>
+            </thead>
+            <?php foreach($list as $v):
+            switch($v['order_status']){
+              case 1:
+                  if($v['order_pay_status'] == 1)
+                  {
+                      $status = '未付款';
+                  }
+                  if($v['order_pay_status'] == 3)
+                  {
+                      $status = '已付款';
+                  }
+                  if($v['order_delivery_status'] == 3)
+                  {
+                      $status = '已发货';
+                  }
+                  break;
+              case 3:
+                  $status = '已收货';
+                  break;
+              case 5:
+                  $status = '已失效';
+                  break;
+              case 7:
+                  $status = '已取消';
+                  break;
+              case 11:
+                  $status = '已完成';
+                  break;
+              }
+           ?>
+            <tbody >
+              <tr class="blank-row"></tr>
+              <tr class="table-hd">
+                <td colspan="5">订单编号:
+                  <span class="order-id"><?php echo $v['order_sn']?></span>
+                  下单时间:
+                  <span class="order-date"><?php echo date('Y-m-d H:i:s',$v['order_addtime'])?></span>
+                </td>
+              </tr>
+                <?php $gnum = count($v['goods']);
+                  if($gnum <= 1 && count($v['goods']) != 0):
+                    $goods = $v['goods'][0];
+                ?>
+              <tr class="table-data">
+                <td class="col-1">
+                  <a class="tdn" href="/goods/index/<?=$goods['goods_id']?>">
+                  <img class="order-item-pic dib fl" style="max-width:80px;height:auto" src="<?php echo $goods['attrs_img'];?>" alt="云朵智能童鞋">
+                  </a>
+                  <div class="order-item-desc dib">
+                    <p class="order-item-name"><a class="tdn" href="/goods/index/<?=$goods['goods_id']?>">云朵智能童鞋</a></p>
+                    <p class="order-item-info">颜色:<?php echo json_decode($goods['attrs_info'],true)[0]['name'] ?> 尺码:<?php echo json_decode($goods['attrs_info'],true)[1]['name'] ?>码</p>
+                  </div>
+                </td>
+                <td class="col-2 tac">
+                  <?php echo $goods['ord_goods_price']?>
+                </td>
+                <td class="col-3 right-bd tac">
+                  <?php echo $goods['ord_goods_num']?>
+                </td>
+                <td rowspan="<?=$gnum?>" class="col-4 merge-row right-bd tac">
+                  <?php echo $v['order_paied']?>
+                </td>
+                <td rowspan="<?=$gnum?>" class="col-5 merge-row tac col-last">
+                  <div class="trade-status rel">
+                    <p><?= $status?>
+                    </p>
+                    <p><a href="/order/detail?sn=<?php echo $v['order_sn']?>" class="tdn color">订单详情> </a>
+                    </p>
+                    <?php if($v['order_delivery_status'] == 3 && $v['order_pay_status'] == 3):?>
+                    <p><a href="javascript:void(0);" class="btn btn-blue more-info confirm-receipt">确认收货</a>
+                    </p>
+                    <?php elseif($v['order_pay_status'] == 1 && $v['order_status'] == 1):?>
+                    <p><a href="/order/payments?id=<?=$v['order_id']?>" class="btn btn-blue more-info">立即支付</a>
+                    </p>
+                    <?php elseif($v['order_status'] == 11):?>
+                    <p><a href="/support/apply?orderSn=<?=$v['order_sn']?>" class="btn btn-blue more-info">申请售后</a>
+                    </p>
+                    <?php endif;?>
+                    <div class="popup dn">
+                      <div class="popup-content">
+                        <div class="popup-header">
+                          <button type="button" class="close">×</button>
+                        </div>
+                        <div class="popup-body">
+                          是否要确认收货？
+                        </div>
+                        <div class="popup-footer">
+                          <div class="action-group">
+                            <input type="button" class="btn btn-info bd-n confirm" value="确定" sn='<?php echo $v['order_sn']?>'>
+                            <input type="button" class="btn btn-info bd-n cancel" value="取消">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </td>
+              </tr>
+            <?php else:?>
+                <?php foreach($v['goods'] as $k=>$r):?>
+
+                  <?php if($k == 0):?>
+              <tr class="table-data">
+                <td class="col-1">
+                <a class="tdn" href="/goods/index/<?=$r['goods_id']?>">
+                  <img class="order-item-pic dib fl" style="max-width:80px;height:auto" src="<?php echo $r['attrs_img'];?>" alt="云朵智能童鞋">
+                </a>
+                  <div class="order-item-desc dib">
+                      <p class="order-item-name"><a class="tdn" href="/goods/index/<?=$r['goods_id']?>">云朵智能童鞋</a></p>
+                      <p class="order-item-info">颜色:<?php echo json_decode($r['attrs_info'],true)[0]['name'] ?> 尺码:<?php echo json_decode($r['attrs_info'],true)[1]['name'] ?>码</p>
+                  </div>
+                </td>
+                <td class="col-2 tac">
+                 <?php echo $r['ord_goods_price']?>
+                </td>
+                <td class="col-3 right-bd tac">
+                 <?php echo $r['ord_goods_num']?>
+                </td>
+                <td rowspan="<?=$gnum?>" class="col-4 merge-row right-bd tac">
+                  <?php echo $v['order_paied']?>
+                </td>
+                <td rowspan="<?=$gnum?>" class="col-5 merge-row tac col-last">
+                  <div class="trade-status rel">
+                    <p><?= $status?>
+                    </p>
+                    <p><a href="/order/detail?sn=<?php echo $v['order_sn']?>" class="tdn color">订单详情> </a>
+                    </p>
+                    <?php if($v['order_delivery_status'] == 3 && $v['order_pay_status'] == 3):?>
+                    <p><a href="javascript:void(0);" class="btn btn-blue more-info confirm-receipt">确认收货</a>
+                    </p>
+                    <?php elseif($v['order_pay_status'] == 1 && $v['order_status'] == 1):?>
+                    <p><a href="/order/payments?id=<?=$v['order_id']?>" class="btn btn-blue more-info">立即支付</a>
+                    </p>
+                    <?php elseif($v['order_status'] == 11):?>
+                    <p><a href="/support/apply?orderSn=<?=$v['order_sn']?>" class="btn btn-blue more-info">申请售后</a>
+                    </p>
+                    <?php endif;?>
+                    <div class="popup dn">
+                      <div class="popup-content">
+                        <div class="popup-header">
+                          <button type="button" class="close">×</button>
+                        </div>
+                        <div class="popup-body">
+                          是否要确认收货？
+                        </div>
+                        <div class="popup-footer">
+                          <div class="action-group">
+                            <input type="button" class="btn btn-info bd-n confirm" value="确定" sn='<?php echo $v['order_sn']?>'>
+                            <input type="button" class="btn btn-info bd-n cancel" value="取消">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </td>
+              </tr>
+                  <?php else:?>
+
+              <tr class="table-data ">
+                <td class="col-1">
+                <a class="tdn" href="/goods/index/<?=$r['goods_id']?>">
+                  <img class="order-item-pic dib fl" style="width:80px;height:auto" src="<?php echo $r['attrs_img'];?>" alt="云朵智能童鞋">
+                </a>
+                  <div class="order-item-desc dib">
+                      <p class="order-item-name"><a class="tdn" href="/goods/index/<?=$r['goods_id']?>">云朵智能童鞋</a></p>
+                      <p class="order-item-info">颜色:<?php echo json_decode($r['attrs_info'],true)[0]['name'] ?> 尺码:<?php echo json_decode($r['attrs_info'],true)[1]['name'] ?>码</p>
+                  </div>
+                </td>
+                <td class="col-2 tac">
+                 <?php echo $r['ord_goods_price']?>
+                </td>
+                <td class="col-3 right-bd tac">
+                 <?php echo $r['ord_goods_num']?>
+                </td>
+              </tr>
+                <?php endif; endforeach; endif; endforeach;?>
+          </table>
+          <!-- 分页页码开始 -->
+          <div class="pages-nav fr fix">
+                  <?php echo $page;?>
+          </div>
+          <!-- 分页页码结束 -->
+
+        </div>
+      </div>
+      <!-- 正文部分结束 -->
+    </div>
+    <!-- 主体部分结束 -->
+  </div>
+<script>
+
+    seajs.config({
+        base : "<?php echo $this->di['sysconfig']['staticServer'];?>js/",
+        alias: {
+            'region' : 'utils/region-front'
+        }
+    });
+    seajs.use(['spm_modules/jquery-plugin/jquery.validate', 'modules/front/order/index']);
+
+</script>

@@ -1,0 +1,20 @@
+<style type="text/css" media="screen">
+    .reg-box .reg-row { margin: 10px 0; }
+    .reg-box .reg-row .copyright { font-size: 13px; color: #999; margin: 20px 0; }
+    .reg-box .reg-row .color { color: #00a9f0; }
+    .reg-box .ver-code-img { height: 34px; width: 33%; vertical-align: top; }
+</style>
+<div class="wrap mb-w auto">
+     <div class="reg-box" style="margin-top:15px">
+      <div class="reg-row">
+        <input class="input input-text" placeholder="请输入云码" ng-model="code">
+      </div>
+      <div class="reg-row"><!-- 多次错误后才出现 -->
+        <input type="text" class="input input-text input-ver-code bk-captcha " placeholder="请输入验证码" ng-model="captcha">
+        <img class="ver-code-img" ng-src="{{codeImg}}" alt="图片验证码" ng-click="changeCode()">
+      </div>
+      <div class="reg-row">
+        <input type="button" style="border:0" class="btn btn-blue bd-none" ng-click="codeUse()" value="使用云码">
+      </div>
+     </div>
+ </div>

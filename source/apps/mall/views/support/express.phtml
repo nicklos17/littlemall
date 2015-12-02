@@ -1,0 +1,57 @@
+<div class="w auto">
+    <div class="crumbs-nav"><a href="#">首页</a>
+        <em>></em><a href="#">订单中心</a>
+        <em>></em><a href="#">售后服务</a>
+        <em>></em><a href="#">提交快递单号</a>
+    </div>
+    <div class="content ovh">
+        <!-- 侧边栏导航开始 -->
+        <?php $this->partial("common/nav") ?>
+        <div class="main fl dib">
+            <div class="info-tit rel">
+                <h2 class="tit dib">提交快递单号</h2>
+            </div>
+            <div class="order">
+                <div class="submit-express">
+                    <div class="reg-row">
+                        <label class="tit">快递公司</label>
+                        <div class="area-select fl">
+                            <select name="ship_comp">
+                                <option value="">请选择快递公司</option>
+                                <?php foreach($this->di['sysconfig']['express'] as $key=>$expressCompany):?>
+                                    <option value="<?=$key?>"><?=$expressCompany?></option>
+                                <?php endforeach;?>
+                            </select>
+                        </div>
+<!--                         <input type="text" class="input input-text" placeholder="请填写快递公司名称" name="ship_other_comp"> -->
+                        <span class="tips tips-error dn" id="error-ship-comp"></span>
+                    </div>
+                    <div class="reg-row">
+                        <label class="tit">快递单号</label>
+                        <input type="text" class="input input-text" name="ship_sn" maxlength="26">
+                        <span class="tips tips-error dn" id="error-ship-sn"></span>
+                    </div>
+                    <div class="reg-row">
+                        <label class="tit"></label>
+                        <input type="button" class="btn btn-blue bd-n" value="提交" id="confirm">
+                    </div>
+                </div>
+                <div class="service-center">
+                    <h3>云朵售后服务中心</h3>
+                    <p>收件人：云朵售后部</p>
+                    <p>收货地址：厦门市湖里区湖里大道78号万山一号办公楼3楼  云朵售后部（收）</p>
+                    <p>客服电话：<strong class="color">400-0000-400</strong></p>
+                    <p>邮编：361000</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+    seajs.config({
+        base : "<?php echo $this->di['sysconfig']['staticServer'];?>js/"
+    });
+    seajs.use('modules/front/support/express');
+
+</script>

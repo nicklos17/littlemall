@@ -1,0 +1,23 @@
+    <div class="mb-w auto my-order-list">
+      <div class="cart-list" ng-repeat="od in orderList">
+        <div class="cart-main">
+          <div class="shoes-type">
+            <img src="{{od.goods[0].attrs_img}}" alt="shoes-type">
+          </div>
+          <div class="cart-info">
+            <p class="tit">{{od.goods[0].goods_name}}</p>
+            <p class="detail">总价：<span>￥{{od.order_paied}} <em>共 {{od.goods.length}} 件</em></span></p>
+            <p class="price-state">{{getStatus(od.order_status, od.order_pay_status, od.order_delivery_status)}}</p>
+          </div>
+          <div class="arrows-right" ng-click="getOrderInfo(od.order_sn)"></div>
+          <div class="btn-row" ng-show="getActStatus(od.order_status, od.order_pay_status, od.order_delivery_status).status">
+            <a href="javascript:void(0)" ng-click="act(od.order_status, od.order_pay_status, od.order_delivery_status, od.order_id, od.order_sn)" class="btn btn-{{getActStatus(od.order_status, od.order_pay_status, od.order_delivery_status).color}}">
+              {{getActStatus(od.order_status, od.order_pay_status, od.order_delivery_status).actStatus}}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="btn-more" ng-show="more">
+      <a ng-click="getMore()" class="more" href="javascript:void(0);" title="显示更多订单">显示更多订单</a>
+    </div>

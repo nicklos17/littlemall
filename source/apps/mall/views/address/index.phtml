@@ -1,0 +1,131 @@
+<div class="w auto">
+    <div class="crumbs-nav"><a href="#">首页</a>
+        <em>></em><a href="#">订单中心</a>
+        <em>></em><a href="#">收货地址</a>
+    </div>
+    <div class="content ovh">
+        <?php $this->partial("common/nav") ?>
+        <div class="main fl dib">
+            <div class="info-tit rel">
+                <h2 class="tit dib">收货地址</h2>
+            </div>
+            <div class="order address fix">
+                <?php foreach($addressList as $address):?>
+                    <div class="address-list address-hover<?php if($address['u_addr_default'] == 3):?> default-address<?php endif;?>" data-id="<?=$address['u_addr_id']?>" id="address-<?=$address['u_addr_id']?>">
+                        <div class="address-header">
+                            <strong class="user-name"><?=$address['u_addr_consignee']?></strong>
+                            <?php if($address['u_addr_default'] == 3):?>
+                                <span class="fr address-default" id="default-badge">默认地址</span>
+                            <?php endif;?>
+                            <span class="fr address-set dn">
+                                <?php if($address['u_addr_default'] != 3):?>
+                                    <a href="javascript:void(0);" class="set-def">设为默认地址</a>
+                                    <em>|</em>
+                                <?php endif;?>
+                                <a href="javascript:void(0);" class="edit-addr">编辑</a>
+                                <em>|</em>
+                                <a href="javascript:void(0)" class="del-addr">删除</a>
+                            </span>
+                        </div>
+                        <div class="address-detail">
+                            <p class="user-tel">
+                                <strong><?php echo $address['u_addr_mobile'] ? : $address['u_addr_tel']?></strong>
+                            </p>
+                            <p>
+                                <span class="address1">
+                                    <?=$address['pro_name']?> <?=$address['city_name']?> <?=$address['dis_name']?>
+                                </span>
+                            </p>
+                            <p>
+                                <span class="address2">
+                                    <?=\Mall\Utils\Inputs::subtext($address['u_addr_info'], 10)?>（<?=$address['u_addr_zipcode']?>）
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                <?php endforeach;?>
+                <div class="address-list empty-address">
+                    <div class="add-address">
+                        <a class="tdn" href="javascript:void(0);">
+                            <img class="vam" src="<?=$this->di['sysconfig']['staticServer']?>images/mall/btn-add.png" alt="使用新地址">
+                            <span class="vam color">使用新地址</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="order-content">
+                <div class="address-new dn">
+                    <p class="address-new-tit">新增收货地址</p>
+                    <!-- 新增收货地址开始 -->
+                    <div class="new-address-box">
+                        <form action="" method="post" id="frm-addr">
+                            <div class="reg-row">
+                                <label class="tit">所在地区</label>
+                                <div class="area-select fl">
+                                    <select name="pro" id="provinces" data-id="" class="region">
+                                        <option value="">请选择省份</option>
+                                    </select>
+                                    <select name="city" id="cities" data-id="" class="region">
+                                        <option value="">请选择城市</option>
+                                    </select>
+                                    <select name="dis" id="districts" data-id="" class="region">
+                                        <option value="">请选择区/县</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="reg-row textarea">
+                                <label class="tit">街道地址</label>
+                                <textarea name="detailAddr" id="address-detail" type="text" class="input input-text input-address" placeholder="不需要重复填写省市区，必须大于4个字符，小于120个字符"></textarea>
+                            </div>
+                            <div class="reg-row">
+                                <label class="tit">邮政编码</label>
+                                <input type="text" class="input input-text" id="zipCode" name="zipCode">
+                            </div>
+                            <div class="reg-row">
+                                <label class="tit">收货人姓名</label>
+                                <input type="text" class="input input-text" placeholder="长度不超过15个字" name="consignee">
+                            </div>
+                            <div class="reg-row">
+                                <label class="tit">手机号码</label>
+                                <input type="hidden" name="tel" value id="tel" class="required_group">
+                                <input type="text" class="input input-text required_group" placeholder="电话号码、手机号码必须填一项" name="mobile">
+                                <span class="tips tips-error dn">手机格式错误</span>
+                            </div>
+                            <div class="reg-row telephone">
+                                <label class="tit">电话号码</label>
+                                <input type="text" class="input input-text tel-field" placeholder="区号" name="areaCode">
+                                <em>-</em>
+                                <input type="text" class="input input-text tel-field" placeholder="电话号码" name="telNum">
+                                <em>-</em>
+                                <input type="text" class="input input-text tel-field" placeholder="分机" name="ext">
+                            </div>
+                            <div class="reg-row">
+                                <label class="tit"></label>
+                                <div class="set-default">
+                                    <input type="checkbox" name="default">设置为默认收货地址
+                                </div>
+                            </div>
+                            <div class="reg-row">
+                                <label class="tit"></label>
+                                <input type="hidden" name="addrId" value="">
+                                <input type="submit" class="btn btn-blue bd-n" value="保存" name="save">
+                                <a class="btn btn-quit color cancel" href="javascript:void(0);">取消</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+    seajs.config({
+        base : "<?php echo $this->di['sysconfig']['staticServer'];?>js/",
+        alias: {
+            'region' : 'utils/region-front'
+        }
+    });
+    seajs.use(['spm_modules/jquery-plugin/jquery.validate', 'modules/front/address/addrValidate', 'modules/front/address/index']);
+
+</script>

@@ -1,0 +1,90 @@
+    <div class="order-bg">
+      <div class="apply-tit-row">
+        <div class="mb-w auto">填写售后服务详情</div>
+      </div>
+      <div class="input-form">
+        <div class="mb-w auto">
+          <div class="row">
+            <label class="input-tit">订单号</label>
+            <span>{{sn}}</span>
+          </div>
+          <div class="row rel">
+            <label class="input-tit">售后类型</label>
+            <select class="select fr" ng-model="bordModelChoose" ng-options="key as bordModel.tit for (key, bordModel) in bordModels"></select>
+          </div>
+          <div class="row apply-shoes">
+            <label class="input-tit">选择鞋子</label>
+            <div class="shoes-list">
+              <div class="shoes-list-box" ng-class="{'disabled': g.dis}" ng-repeat="g in goods" ng-click="chooseBordGoods(g.ord_goods_id, g.dis)">
+                <div class="inner">
+                  <img src="{{g.attrs_img}}" alt="shoes-type">
+                  <img ng-show="chooseBordGoodsId == g.ord_goods_id" src="/img/ng/apply-shoes-choose.png" class="shoes-choose">
+                </div>
+                <p ng-repeat="ks in g.attrArr">{{ks.type}}:{{ks.name}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <label class="input-tit">申请数量</label>
+            <input class="input" ng-model="orderInfo.goods_num" type="text" placeholder="必填">
+          </div>
+          <div class="row rel">
+            <label class="input-tit">申请原因</label>
+            <select class="select fr" style="width:70%" ng-model="bordReasonChoose" ng-options="key as bordReason for (key, bordReason) in bordReason"></select>
+          </div>
+          <div class="row address">
+            <label class="input-tit">情况描述</label>
+            <textarea class="input" ng-model="bordMsg" style="margin-top:5px" type="text" placeholder="最少填写6个汉字，最多120个汉字"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="apply-tit-row">
+        <div class="mb-w auto">确认收货地址</div>
+      </div>
+      <div class="input-form">
+        <div class="mb-w auto">
+          <div class="row">
+            <label class="input-tit">收货人</label>
+            <input class="input" type="text" ng-model="orderInfo.order_consignee" placeholder="长度不超过25个字符">
+          </div>
+          <div class="row">
+            <label class="input-tit">手机号码</label>
+            <input class="input" type="text" ng-model="orderInfo.order_mobile" placeholder="电话号码，手机号码必须选填一项">
+          </div>
+          <div class="row">
+            <label class="input-tit">电话号码</label>
+            <input style="width:10%" ng-model="orderInfo.areaCode" class="input" type="text" placeholder="区号">-
+            <input style="width:30%" ng-model="orderInfo.telNum" class="input" type="text" placeholder="电话号码">-
+            <input style="width:20%" ng-model="orderInfo.ext" class="input" type="text" placeholder="分机号">
+          </div>
+          <div class="row">
+            <label class="input-tit">选择地区</label>
+            <select class="select" style="width:25%;float:none" ng-model="orderInfo.order_province" ng-options="pro.pro_id as pro.pro_name for pro in provinces" ng-change="choosePro(orderInfo.order_province)">
+            </select>
+            <select class="select"  style="width:25%;float:none" ng-model="orderInfo.order_city" ng-options="city.city_id as city.city_name for city in citits" ng-change="chooseCity(orderInfo.order_city)">
+            </select>
+            <select class="select" style="width:25%;float:none" ng-model="orderInfo.order_district" ng-options="dis.dis_id as dis.dis_name for dis in districts">
+            </select>
+          </div>
+          <div class="row address">
+            <label class="input-tit">详细地址</label>
+            <textarea class="input" type="text" ng-model="orderInfo.order_addr" placeholder="不需要重复填写省市区，必须大于5个字符，小于120个字符"></textarea>
+          </div>
+<!--           <div class="row">
+            <label class="input-tit">邮政编码</label>
+            <input class="input" ng-model="orderInfo.order_addr" type="text" placeholder="邮政编码">
+          </div> -->
+        </div>
+      </div>
+
+       <div class="apply-tit-row">
+        <div class="mb-w auto">请您在提交售后服务单后，等待客服进行确认，再邮寄回云朵售后服务中心。</div>
+      </div>
+      <div class="btn-submit">
+        <div class="mb-w auto">
+          <a class="submit" href="javascript:void(0);" title="提交" ng-click="confirmBord()">提交</a>
+        </div>
+      </div>
+
+    </div>

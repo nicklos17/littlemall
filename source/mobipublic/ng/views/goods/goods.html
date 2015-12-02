@@ -1,0 +1,65 @@
+  <div class="fix-btn">
+    <a hre class="btn-add-cart"  ng-click="addCart()">加入购物车</a>
+    <a href class="btn-buy" ng-click="buy()">立即购买</a>
+  </div>
+  <div class="fix-tips" ng-if="showSizeCol">
+    请选择尺码、颜色
+  </div>
+  <div class="detail-content">
+    <p class="shoes-show"><img ng-src="{{showImg}}" alt="商品图片"></p>
+    <div class="shoes-desc">
+      <p class="tit">￥{{goodsInfo.gInfo.goods_price}}</p>
+      <p class="desc">{{goodsInfo.gInfo.goods_brief}}</p>
+    </div>
+
+    <div ng-repeat="(attrKey, attrsClass) in goodsInfo.gAttrs" ng-switch on=attrsClass.attrs_name>
+      <div class="shoes-size" ng-switch-when="尺码">
+        <p class="tit">尺码<input type="hidden" id="pSize" value="{{attrsClass.attrs_id}}"/></p>
+        <div class="size-list" >
+        <a href  ng-repeat="gaAttr in goodsInfo.gaAttrs" ng-class="{'active':sizeCur == {{gaAttr.attrs_id}}, 'disabled': disSize.indexOf({{gaAttr.attrs_id}}) != -1}" ng-if="attrKey==gaAttr.gac_parent_id"
+          data-id="{{gaAttr.attrs_id}}" ng-click="filterSize(this)" class="size-num">
+          {{gaAttr.attrs_name}}
+        </a>
+        </div>
+      </div>
+
+      <div class="shoes-color"  ng-switch-when="颜色">
+      <p class="tit">颜色<input type="hidden" id="pCol" value="{{attrsClass.attrs_id}}"/></p>
+      <div class="color-list">
+        <a href class="color-kind" ng-repeat="gaAttr in goodsInfo.gaAttrs" ng-class="{'active':colCur == {{gaAttr.attrs_id}}, 'disabled': disCol.indexOf({{gaAttr.attrs_id}}) != -1}" ng-if="attrKey==gaAttr.gac_parent_id" ><img ng-src="{{gaAttr.attrs_img}}" data-id="{{gaAttr.attrs_id}}" ng-click="filterCol(this)" alt="款式"></a>
+      </div>
+    </div>
+
+    </div>
+
+    <div class="shoes-num bdn">
+      <p class="tit">数量</p>
+      <div class="input-num fix" ng-if="goodsInfo.codeFlag==0">
+        <a href="javascript:void(0);" class="reduce" ng-click="numRdc()" ng-class="{'disabled': goodsNum == '1'}">-</a>
+          <input type="text" ng-model="goodsNum" readOnly class="shoes-input-num">
+        <a href="javascript:void(0);" class="add" ng-click="numAdd()" ng-class="{'disabled': goodsNum == '20'}">+</a>
+      </div>
+    </div>
+      <div class="input-num fix" ng-if="goodsInfo.codeFlag==1">
+        <a href="javascript:void(0);" class="reduce disabled">-</a>
+          <input type="text" ng-model="goodsNum" readOnly class="shoes-input-num">
+        <a href="javascript:void(0);" class="add disabled">+</a>
+      </div>
+  </div>
+
+  <!--<div class="detail-list">
+    <div class="detail-tab fix">
+      <a class="current" href="#" title="产品详情">产品详情</a>
+      <a href="#" title="产品参数">产品参数</a>
+    </div>
+    <div class="detail-main">
+      <p><img lazy-src="/img/ng/detail-list-1.jpg" alt="detail-list" class="b-lazy"></p>
+      <p><img lazy-src="/img/ng/detail-list-2.jpg" alt="detail-list" class="b-lazy"></p>
+      <p><img lazy-src="/img/ng/detail-list-3.jpg" alt="detail-list" class="b-lazy"></p>
+      <p><img lazy-src="/img/ng/detail-list-4.jpg" alt="detail-list" class="b-lazy"></p>
+      <p><img lazy-src="/img/ng/detail-list-5.jpg" alt="detail-list" class="b-lazy"></p>
+      <p><img lazy-src="/img/ng/detail-list-6.jpg" alt="detail-list" class="b-lazy"></p>
+      <p><img lazy-src="/img/ng/detail-list-7.jpg" alt="detail-list" class="b-lazy"></p>
+      <p><img lazy-src="/img/ng/detail-list-8.jpg" alt="detail-list" class="b-lazy"></p>
+    </div>
+  </div>-->
